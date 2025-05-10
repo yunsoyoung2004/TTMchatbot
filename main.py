@@ -99,9 +99,12 @@ def root():
     return JSONResponse({"message": "✅ TTM 멀티에이전트 챗봇 서버 실행 중"})
 
 # ✅ 루트 경로 HEAD (Render 헬스체크용)
+from fastapi import Response
+
 @app.head("/")
 def root_head():
-    return JSONResponse(status_code=200)
+    return Response(status_code=200)
+
 
 # ✅ 챗봇 스트리밍 엔드포인트
 @app.post("/chat/stream")
