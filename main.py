@@ -88,17 +88,17 @@ async def load_all_models():
         print(f"❌ 모델 다운로드 실패: {e}")
         model_ready = False
 
-# ✅ 로딩 상태 확인
+# ✅ 헬스체크용 상태 확인
 @app.get("/status")
 def check_model_status():
     return {"ready": model_ready}
 
-# ✅ 루트 경로 GET 응답
+# ✅ 루트 경로 GET
 @app.get("/")
 def root():
     return JSONResponse({"message": "✅ TTM 멀티에이전트 챗봇 서버 실행 중"})
 
-# ✅ 루트 경로 HEAD 응답 (Render 헬스체크용)
+# ✅ 루트 경로 HEAD (Render 헬스체크용)
 @app.head("/")
 def root_head():
     return JSONResponse(status_code=200)
@@ -141,7 +141,7 @@ async def chat_stream(request: Request):
 
     return StreamingResponse(async_gen(), media_type="text/plain")
 
-# ✅ 로컬 또는 Render에서 실행할 때 포트 바인딩
+# ✅ Render에서 실행될 수 있도록 명시적 실행 포인트 추가
 if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 10000))
