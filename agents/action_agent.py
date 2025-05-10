@@ -3,6 +3,33 @@ from typing import Literal, List, Optional, AsyncGenerator
 from pydantic import BaseModel
 import os, json, multiprocessing, difflib, re
 
+# ✅ 전역 모델 인스턴스 캐싱
+LLM_PPI_INSTANCE = None
+
+def load_ppi_model(model_path: str):
+    global LLM_PPI_INSTANCE
+    if LLM_PPI_INSTANCE is None:
+        print("🚀 PPI 모델 최초 로딩 중...")
+        NUM_THREADS = max(1, multiprocessing.cpu_count() - 1)
+        LLM_PPI_INSTANCE = Llama(
+            model_path=model_path,
+            n_ctx=384,
+            n_threads=NUM_THREADS,
+            n_batch=8,
+            max_tokens=64,
+            temperature=0.6,
+            top_p=0.85,
+            repeat_penalty=1.1,
+            n_gpu_layers=0,
+            low_vram=True,
+            use_mlock=False,
+            verbose=False,
+            chat_format="llama-3",
+            stop=["User:", "Assistant:"]
+        )
+        print("✅ PPI 모델 로딩 완료")
+    return LLM_PPI_INSTANCE
+
 # ✅ 상태 모델 정의
 class AgentState(BaseModel):
     stage: Literal["ppi", "action"]
@@ -16,7 +43,7 @@ class AgentState(BaseModel):
 
 # ✅ 중복 응답 판단
 def is_redundant_response(new_text: str, history: List[str], threshold: float = 0.92) -> bool:
-    past = history[-1::-2]  # assistant 응답만
+    past = history[-1::-2]
     return any(
         difflib.SequenceMatcher(None, new_text.strip(), h.strip()).ratio() > threshold
         for h in past
@@ -37,7 +64,7 @@ def get_fallback_plan(turn: int) -> str:
     ]
     return fallback[turn % len(fallback)]
 
-# ✅ PPI 응답 생성 (모델 경로를 전달받음)
+# ✅ PPI 응답 생성
 async def stream_ppi_reply(state: AgentState, model_path: str) -> AsyncGenerator[bytes, None]:
     user_input = state.question.strip()
 
@@ -69,44 +96,30 @@ async def stream_ppi_reply(state: AgentState, model_path: str) -> AsyncGenerator
         }, ensure_ascii=False).encode("utf-8")
         return
 
-    # ✅ 모델 로딩
-    NUM_THREADS = max(1, multiprocessing.cpu_count() - 1)
-    llm_ppi = Llama(
-        model_path=model_path,
-        n_ctx=384,
-        n_threads=NUM_THREADS,
-        n_batch=8,
-        max_tokens=64,
-        temperature=0.6,
-        top_p=0.85,
-        repeat_penalty=1.1,
-        n_gpu_layers=0,
-        low_vram=True,
-        use_mlock=False,
-        verbose=False,
-        chat_format="llama-3",
-        stop=["User:", "Assistant:"]
-    )
-
-    # ✅ 메시지 구성
-    instruction = (
-        "당신은 긍정 심리 기반 실천 코치입니다. "
-        "사용자의 강점과 의지를 바탕으로 정중한 존댓말로 2~3문장으로 실현 가능한 작은 실천 계획을 제안하세요. "
-        "실천 계획 뒤에는 항상 '이 계획에 대해 어떻게 생각하세요?'라는 질문으로 마무리하세요.\n\n"
-    )
-
-    messages = [{"role": "user", "content": instruction + f"사용자 입력: {user_input}"}]
-    if len(state.history) >= 4:
-        messages.insert(0, {"role": "user", "content": state.history[-2]})
-        messages.insert(1, {"role": "assistant", "content": state.history[-1]})
-
-    full_response = ""
-
     try:
+        llm_ppi = load_ppi_model(model_path)
+
+        instruction = (
+            "당신은 긍정 심리 기반 실천 코치입니다. "
+            "사용자의 강점과 의지를 바탕으로 정중한 존댓말로 2~3문장으로 실현 가능한 작은 실천 계획을 제안하세요. "
+            "실천 계획 뒤에는 항상 '이 계획에 대해 어떻게 생각하세요?'라는 질문으로 마무리하세요.\n\n"
+        )
+
+        messages = [{"role": "user", "content": instruction + f"사용자 입력: {user_input}"}]
+        if len(state.history) >= 4:
+            messages.insert(0, {"role": "user", "content": state.history[-2]})
+            messages.insert(1, {"role": "assistant", "content": state.history[-1]})
+
+        full_response = ""
+        first_token_sent = False
+
         for chunk in llm_ppi.create_chat_completion(messages=messages, stream=True):
             token = chunk["choices"][0]["delta"].get("content", "")
             if token:
                 full_response += token
+                if not first_token_sent:
+                    yield b"\n"
+                    first_token_sent = True
                 yield token.encode("utf-8")
 
         reply = full_response.strip()
@@ -134,3 +147,5 @@ async def stream_ppi_reply(state: AgentState, model_path: str) -> AsyncGenerator
     except Exception as e:
         err = f"⚠️ PPI 응답 오류가 발생했어요: {e}"
         yield err.encode("utf-8")
+
+__all__ = ["stream_ppi_reply"]

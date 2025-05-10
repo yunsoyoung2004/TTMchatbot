@@ -3,6 +3,35 @@ from typing import AsyncGenerator, Literal, List, Optional
 from pydantic import BaseModel
 from llama_cpp import Llama
 
+# ✅ 전역 모델 캐시
+LLM_MI_INSTANCE = None
+
+def load_mi_model(model_path: str):
+    global LLM_MI_INSTANCE
+    if LLM_MI_INSTANCE is None:
+        print("🚀 MI 모델 최초 로딩 중...")
+        LLM_MI_INSTANCE = Llama(
+            model_path=model_path,
+            n_ctx=256,
+            n_threads=max(1, multiprocessing.cpu_count() - 1),
+            n_batch=4,
+            max_tokens=64,
+            temperature=0.7,
+            top_p=0.85,
+            top_k=40,
+            repeat_penalty=1.1,
+            frequency_penalty=0.7,
+            presence_penalty=0.5,
+            n_gpu_layers=0,
+            low_vram=True,
+            use_mlock=False,
+            verbose=False,
+            chat_format="llama-3",
+            stop=["<|im_end|>", "\n\n"]
+        )
+        print("✅ MI 모델 로딩 완료")
+    return LLM_MI_INSTANCE
+
 # ✅ 상태 정의
 class AgentState(BaseModel):
     stage: Literal["mi", "s_turn"]
@@ -13,7 +42,7 @@ class AgentState(BaseModel):
     intro_shown: bool
     pending_response: Optional[str] = None
 
-# ✅ 시스템 프롬프트 생성
+# ✅ 시스템 프롬프트
 def get_system_prompt(turn: int) -> str:
     base = (
         "당신은 공감적이고 따뜻한 MI 상담자입니다. "
@@ -26,7 +55,7 @@ def get_system_prompt(turn: int) -> str:
         else " 공감 1문장 + 변화 탐색 질문 1문장으로 구성해 주세요."
     )
 
-# ✅ 존댓말 보정
+# ✅ 말투 보정
 def normalize_politeness(text: str) -> str:
     if not re.search(r"(요|죠|가요|네요)[.?!]?$", text.strip()):
         return text.strip() + " 괜찮으셨을까요?"
@@ -64,7 +93,6 @@ def get_fallback_question(turn: int) -> str:
 async def stream_mi_reply(state: AgentState, model_path: str) -> AsyncGenerator[bytes, None]:
     user_input = state.question.strip()
 
-    # ✅ 첫 인트로 메시지
     if state.turn == 0 and not state.intro_shown:
         intro = (
             "👋 안녕하세요. 저는 감정을 함께 탐색하는 MI 상담자입니다.\n"
@@ -91,41 +119,25 @@ async def stream_mi_reply(state: AgentState, model_path: str) -> AsyncGenerator[
         }, ensure_ascii=False).encode("utf-8")
         return
 
-    # ✅ 모델 로딩
-    llm = Llama(
-        model_path=model_path,
-        n_ctx=256,
-        n_threads=max(1, multiprocessing.cpu_count() - 1),
-        n_batch=4,
-        max_tokens=64,
-        temperature=0.7,
-        top_p=0.85,
-        top_k=40,
-        repeat_penalty=1.1,
-        frequency_penalty=0.7,
-        presence_penalty=0.5,
-        n_gpu_layers=0,
-        low_vram=True,
-        use_mlock=False,
-        verbose=False,
-        chat_format="llama-3",
-        stop=["<|im_end|>", "\n\n"]
-    )
-
-    # ✅ 메시지 구성
-    messages = [{"role": "system", "content": get_system_prompt(state.turn)}]
-    if len(state.history) >= 4:
-        messages.append({"role": "user", "content": state.history[-2]})
-        messages.append({"role": "assistant", "content": state.history[-1]})
-    messages.append({"role": "user", "content": user_input})
-
-    full_response = ""
-
     try:
+        llm = load_mi_model(model_path)
+
+        messages = [{"role": "system", "content": get_system_prompt(state.turn)}]
+        if len(state.history) >= 4:
+            messages.append({"role": "user", "content": state.history[-2]})
+            messages.append({"role": "assistant", "content": state.history[-1]})
+        messages.append({"role": "user", "content": user_input})
+
+        full_response = ""
+        first_token_sent = False
+
         for chunk in llm.create_chat_completion(messages=messages, stream=True):
             token = chunk["choices"][0]["delta"].get("content", "")
             if token:
                 full_response += token
+                if not first_token_sent:
+                    yield b"\n"
+                    first_token_sent = True
                 yield token.encode("utf-8")
 
         reply = full_response.strip()

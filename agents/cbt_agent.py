@@ -3,6 +3,33 @@ from typing import Literal, List, Optional, AsyncGenerator
 from pydantic import BaseModel
 import os, json, multiprocessing
 
+# ✅ 전역 모델 인스턴스 캐시
+LLM_CBT_INSTANCE = None
+
+def load_cbt_model(model_path: str):
+    global LLM_CBT_INSTANCE
+    if LLM_CBT_INSTANCE is None:
+        print("🚀 CBT Llama 모델 최초 로딩 중...")
+        NUM_THREADS = max(1, multiprocessing.cpu_count() - 1)
+        LLM_CBT_INSTANCE = Llama(
+            model_path=model_path,
+            n_threads=NUM_THREADS,
+            n_ctx=384,
+            n_batch=8,
+            max_tokens=48,
+            temperature=0.5,
+            top_p=0.85,
+            repeat_penalty=1.05,
+            n_gpu_layers=0,
+            low_vram=True,
+            use_mlock=False,
+            verbose=False,
+            chat_format="llama-3",
+            stop=["User:", "Assistant:"]
+        )
+        print("✅ CBT 모델 로딩 완료")
+    return LLM_CBT_INSTANCE
+
 # ✅ 상태 모델
 class AgentState(BaseModel):
     stage: Literal["cbt", "action"]
@@ -14,7 +41,7 @@ class AgentState(BaseModel):
     awaiting_s_turn_decision: bool
     pending_response: Optional[str] = None
 
-# ✅ CBT 스트리밍 응답 함수 (model_path를 인자로 받음)
+# ✅ CBT 스트리밍 응답 함수
 async def stream_cbt_reply(state: AgentState, model_path: str) -> AsyncGenerator[bytes, None]:
     user_input = state.question.strip()
 
@@ -45,46 +72,32 @@ async def stream_cbt_reply(state: AgentState, model_path: str) -> AsyncGenerator
         }, ensure_ascii=False).encode("utf-8")
         return
 
-    # ✅ 모델 동적 로드
-    NUM_THREADS = max(1, multiprocessing.cpu_count() - 1)
-    llm_cbt = Llama(
-        model_path=model_path,
-        n_threads=NUM_THREADS,
-        n_ctx=384,
-        n_batch=8,
-        max_tokens=48,
-        temperature=0.5,
-        top_p=0.85,
-        repeat_penalty=1.05,
-        n_gpu_layers=0,
-        low_vram=True,
-        use_mlock=False,
-        verbose=False,
-        chat_format="llama-3",
-        stop=["User:", "Assistant:"]
-    )
-
-    # ✅ 프롬프트 구성
-    messages = [
-        {"role": "system", "content": (
-            "너는 CBT 상담자야. 사용자의 비합리적인 사고를 따뜻하게 재구성하는 1~2문장 질문을 해. "
-            "반드시 한 문단으로 끝내고, 모든 문장은 존댓말로 마무리해. "
-        )}
-    ]
-    if len(state.history) >= 2:
-        messages.append({"role": "user", "content": state.history[-2]})
-        messages.append({"role": "assistant", "content": state.history[-1]})
-    messages.append({"role": "user", "content": user_input})
-
-    buffer = ""
-    first_token_sent = False
-
     try:
+        llm_cbt = load_cbt_model(model_path)
+
+        messages = [
+            {"role": "system", "content": (
+                "너는 CBT 상담자야. 사용자의 비합리적인 사고를 따뜻하게 재구성하는 1~2문장 질문을 해. "
+                "반드시 한 문단으로 끝내고, 모든 문장은 존댓말로 마무리해."
+            )}
+        ]
+        if len(state.history) >= 2:
+            messages.append({"role": "user", "content": state.history[-2]})
+            messages.append({"role": "assistant", "content": state.history[-1]})
+        messages.append({"role": "user", "content": user_input})
+
+        buffer = ""
+        first_token_sent = False
+
         for chunk in llm_cbt.create_chat_completion(messages=messages, stream=True):
             token = chunk["choices"][0]["delta"].get("content", "")
             if token:
                 buffer += token
+                if not first_token_sent:
+                    yield b"\n"
+                    first_token_sent = True
                 yield token.encode("utf-8")
+
     except Exception as e:
         error_msg = f"⚠️ CBT 응답 오류: {e}"
         yield error_msg.encode("utf-8")
@@ -113,3 +126,4 @@ async def stream_cbt_reply(state: AgentState, model_path: str) -> AsyncGenerator
     }, ensure_ascii=False).encode("utf-8")
 
 __all__ = ["stream_cbt_reply"]
+
