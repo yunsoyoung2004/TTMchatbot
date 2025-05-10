@@ -1,12 +1,24 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Response
 from fastapi.responses import StreamingResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Literal, List, Optional
-import json, os
+import json, os, asyncio
 from huggingface_hub import hf_hub_download
 
-# ✅ 상태 정의
+# ✅ FastAPI 인스턴스는 단 1회 선언
+app = FastAPI()
+
+# ✅ CORS 설정
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# ✅ 상태 모델 정의
 class AgentState(BaseModel):
     stage: Literal["empathy", "mi", "s_turn", "cbt", "ppi", "action", "end"]
     question: str
@@ -22,25 +34,14 @@ class AgentState(BaseModel):
 class ChatRequest(BaseModel):
     state: AgentState
 
-# ✅ 에이전트 함수 불러오기
+# ✅ 에이전트 불러오기
 from agents.empathy_agent import stream_empathy_reply
 from agents.mi_agent import stream_mi_reply
 from agents.s_turn_agent import stream_s_turn_reply
 from agents.cbt_agent import stream_cbt_reply
 from agents.action_agent import stream_ppi_reply
 
-# ✅ FastAPI 초기화
-app = FastAPI()
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-# ✅ 모델 준비 상태 및 경로 저장
+# ✅ 모델 준비 상태
 model_ready = False
 model_paths = {}
 
@@ -88,25 +89,22 @@ async def load_all_models():
         print(f"❌ 모델 다운로드 실패: {e}")
         model_ready = False
 
-# ✅ 헬스체크용 상태 확인
+# ✅ 상태 확인용 라우터
 @app.get("/status")
 def check_model_status():
     return {"ready": model_ready}
 
-# ✅ 루트 경로 GET
+# ✅ 루트 확인용 GET
 @app.get("/")
 def root():
     return JSONResponse({"message": "✅ TTM 멀티에이전트 챗봇 서버 실행 중"})
 
-# ✅ 루트 경로 HEAD (Render 헬스체크용)
-from fastapi import Response
-
+# ✅ 루트 HEAD (Render 헬스체크용)
 @app.head("/")
 def root_head():
     return Response(status_code=200)
 
-
-# ✅ 챗봇 스트리밍 엔드포인트
+# ✅ 스트리밍 응답 엔드포인트
 @app.post("/chat/stream")
 async def chat_stream(request: Request):
     data = await request.json()
@@ -144,14 +142,7 @@ async def chat_stream(request: Request):
 
     return StreamingResponse(async_gen(), media_type="text/plain")
 
-# ✅ Render에서 실행될 수 있도록 명시적 실행 포인트 추가
-if __name__ == "__main__":
-    import uvicorn
-    port = int(os.environ.get("PORT", 10000))
-    uvicorn.run("main:app", host="0.0.0.0", port=port)
-
-import asyncio
-
+# ✅ keep-alive dummy loop
 @app.on_event("startup")
 async def keep_alive():
     asyncio.create_task(dummy_loop())
@@ -160,8 +151,8 @@ async def dummy_loop():
     while True:
         await asyncio.sleep(3600)
 
-app = FastAPI()
-
-@app.get("/")
-def read_root():
-    return {"message": "Hello from GCP Cloud Run"}
+# ✅ 로컬 실행용 (Render는 무시함)
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.environ.get("PORT", 10000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
