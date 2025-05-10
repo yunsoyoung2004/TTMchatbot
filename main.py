@@ -159,3 +159,9 @@ async def keep_alive():
 async def dummy_loop():
     while True:
         await asyncio.sleep(3600)
+
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"message": "Hello from GCP Cloud Run"}

@@ -2,7 +2,6 @@ from llama_cpp import Llama
 import os, re, json
 from typing import AsyncGenerator
 
-# ✅ 모델 캐싱
 LLM_INSTANCE = None
 
 def load_llama_model(model_path: str):
@@ -47,15 +46,19 @@ def polish_sentence(text: str) -> str:
 
 async def stream_empathy_reply(user_input: str, model_path: str) -> AsyncGenerator[bytes, None]:
     user_input = user_input.strip()
+    print(f"🟡 사용자 입력 수신: '{user_input}'")
 
     if len(user_input) < 3:
         fallback = "조금만 더 이야기해 주실 수 있을까요?"
+        print("⚠️ 입력이 너무 짧아 fallback 응답 전송")
         yield fallback.encode("utf-8")
         yield b"\n---END_STAGE---\n" + b'{"next_stage": "mi"}'
         return
 
     try:
+        print("🔄 모델 로딩 시작")
         llm = load_llama_model(model_path)
+        print("✅ 모델 로딩 완료")
 
         system_prompt = (
             "당신은 따뜻하고 공감 잘하는 상담자입니다. "
@@ -67,12 +70,14 @@ async def stream_empathy_reply(user_input: str, model_path: str) -> AsyncGenerat
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_input}
         ]
+        print("🧠 메시지 구성 완료 → 모델 호출 시작")
 
         full_response = ""
         first_token_sent = False
 
         for chunk in llm.create_chat_completion(messages=messages, stream=True):
             token = chunk["choices"][0]["delta"].get("content", "")
+            print(f"📤 토큰 수신 중: '{token}'")
             if token:
                 full_response += token
                 if not first_token_sent:
@@ -80,8 +85,10 @@ async def stream_empathy_reply(user_input: str, model_path: str) -> AsyncGenerat
                     first_token_sent = True
                 yield token.encode("utf-8")
 
+        print(f"🧹 전체 응답 정제 전: '{full_response.strip()}'")
         cleaned = deduplicate_streaming_text(full_response.strip())
         polished = polish_sentence(cleaned)
+        print(f"✨ 정제된 최종 응답: '{polished}'")
 
         yield b"\n---END_STAGE---\n" + json.dumps({
             "next_stage": "mi",
@@ -89,9 +96,11 @@ async def stream_empathy_reply(user_input: str, model_path: str) -> AsyncGenerat
         }, ensure_ascii=False).encode("utf-8")
 
     except Exception as e:
+        print(f"❌ 예외 발생: {e}")
         error_msg = f"\n⚠️ 오류가 발생했어요: {e}"
         yield error_msg.encode("utf-8")
         yield b"\n---END_STAGE---\n" + json.dumps({
             "next_stage": "mi",
             "response": "죄송합니다. 다시 말씀해 주실 수 있을까요?"
         }, ensure_ascii=False).encode("utf-8")
+
