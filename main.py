@@ -149,3 +149,13 @@ if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 10000))
     uvicorn.run("main:app", host="0.0.0.0", port=port)
+
+import asyncio
+
+@app.on_event("startup")
+async def keep_alive():
+    asyncio.create_task(dummy_loop())
+
+async def dummy_loop():
+    while True:
+        await asyncio.sleep(3600)
