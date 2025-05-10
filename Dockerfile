@@ -1,13 +1,16 @@
 FROM python:3.11-slim
 
-# 필수 패키지 추가: gcc, g++, cmake, build-essential
+# 빌드 도구 설치
 RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
+    git \
     gcc \
     g++ \
-    git \
     && apt-get clean
+
+# pip 최신화
+RUN pip install --upgrade pip
 
 WORKDIR /app
 
