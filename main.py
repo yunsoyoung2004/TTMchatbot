@@ -50,10 +50,8 @@ async def load_all_models():
     global model_ready, model_paths
     try:
         print("⏳ Hugging Face에서 모델 다운로드 중...")
-
         hf_token = os.environ.get("HUGGINGFACE_TOKEN")
 
-        # 모델 정의 (경로 주의: "ppi" 빠져있었음 → 추가)
         models_to_download = {
             "base": {
                 "repo_id": "youngbongbong/mimodel",
@@ -95,10 +93,15 @@ async def load_all_models():
 def check_model_status():
     return {"ready": model_ready}
 
-# ✅ 기본 루트 엔드포인트
+# ✅ 루트 경로 GET 응답
 @app.get("/")
 def root():
     return JSONResponse({"message": "✅ TTM 멀티에이전트 챗봇 서버 실행 중"})
+
+# ✅ 루트 경로 HEAD 응답 (Render 헬스체크용)
+@app.head("/")
+def root_head():
+    return JSONResponse(status_code=200)
 
 # ✅ 챗봇 스트리밍 엔드포인트
 @app.post("/chat/stream")
@@ -121,7 +124,7 @@ async def chat_stream(request: Request):
                 yield chunk
 
         elif state.stage == "s_turn":
-            async for chunk in stream_s_turn_reply(state, model_paths["base"]):  # 아직 모델 직접 사용 안함
+            async for chunk in stream_s_turn_reply(state, model_paths["base"]):
                 yield chunk
 
         elif state.stage == "cbt":
@@ -138,11 +141,8 @@ async def chat_stream(request: Request):
 
     return StreamingResponse(async_gen(), media_type="text/plain")
 
+# ✅ 로컬 또는 Render에서 실행할 때 포트 바인딩
 if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 10000))
     uvicorn.run("main:app", host="0.0.0.0", port=port)
-
-@app.head("/")
-def head_root():
-    return JSONResponse(status_code=200)
