@@ -137,3 +137,12 @@ async def chat_stream(request: Request):
             yield b"\n---END_STAGE---\n" + json.dumps({"next_stage": state.stage}).encode("utf-8")
 
     return StreamingResponse(async_gen(), media_type="text/plain")
+
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.environ.get("PORT", 10000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
+
+@app.head("/")
+def head_root():
+    return JSONResponse(status_code=200)
