@@ -9,7 +9,6 @@ RUN apt-get update && apt-get install -y \
     g++ \
     && apt-get clean
 
-# ✅ gcc/g++ 환경 변수 지정 (이게 핵심!)
 ENV CC=/usr/bin/gcc
 ENV CXX=/usr/bin/g++
 
@@ -18,9 +17,9 @@ RUN pip install --upgrade pip
 
 WORKDIR /app
 
-# ✅ requirements.txt 설치
+# ✅ requirements.txt 설치 (핵심 수정: --prefer-binary)
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --prefer-binary --no-cache-dir -r requirements.txt
 
 # ✅ 나머지 앱 복사
 COPY . .
