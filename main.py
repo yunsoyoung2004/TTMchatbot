@@ -3,7 +3,8 @@ from fastapi.responses import StreamingResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Literal, List, Optional
-import json
+import json, os
+from huggingface_hub import hf_hub_download
 
 # ✅ 상태 정의
 class AgentState(BaseModel):
@@ -21,7 +22,7 @@ class AgentState(BaseModel):
 class ChatRequest(BaseModel):
     state: AgentState
 
-# ✅ 스트리밍 함수만 import
+# ✅ 에이전트 함수 불러오기
 from agents.empathy_agent import stream_empathy_reply
 from agents.mi_agent import stream_mi_reply
 from agents.s_turn_agent import stream_s_turn_reply
@@ -30,6 +31,7 @@ from agents.action_agent import stream_ppi_reply
 
 # ✅ FastAPI 초기화
 app = FastAPI()
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -38,36 +40,96 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# ✅ 모델 준비 상태 및 경로 저장
+model_ready = False
+model_paths = {}
+
+# ✅ 모델 다운로드
+@app.on_event("startup")
+async def load_all_models():
+    global model_ready, model_paths
+    try:
+        print("⏳ Hugging Face에서 모델 다운로드 중...")
+
+        hf_token = os.environ.get("HUGGINGFACE_TOKEN")
+
+        # 모델 정의 (경로 주의: "ppi" 빠져있었음 → 추가)
+        models_to_download = {
+            "base": {
+                "repo_id": "youngbongbong/mimodel",
+                "filename": "merged-mi-chat-q4_k_m.gguf",
+            },
+            "cbt": {
+                "repo_id": "youngbongbong/cbtmodel",
+                "filename": "merged-cbt-chat-q4_k_m.gguf",
+            },
+            "mi": {
+                "repo_id": "youngbongbong/ppimodel",
+                "filename": "merged-ppi-prep-chat-q4_k_m.gguf",
+            },
+            "ppi": {
+                "repo_id": "youngbongbong/ppimodel",
+                "filename": "merged-ppi-prep-chat-q4_k_m.gguf",
+            }
+        }
+
+        for key, meta in models_to_download.items():
+            print(f"📥 {key} 모델 다운로드 중...")
+            path = hf_hub_download(
+                repo_id=meta["repo_id"],
+                filename=meta["filename"],
+                token=hf_token
+            )
+            model_paths[key] = path
+            print(f"✅ {key} 모델 경로: {path}")
+
+        model_ready = True
+        print("🎉 모든 모델 다운로드 및 경로 등록 완료")
+
+    except Exception as e:
+        print(f"❌ 모델 다운로드 실패: {e}")
+        model_ready = False
+
+# ✅ 로딩 상태 확인
+@app.get("/status")
+def check_model_status():
+    return {"ready": model_ready}
+
+# ✅ 기본 루트 엔드포인트
 @app.get("/")
 def root():
     return JSONResponse({"message": "✅ TTM 멀티에이전트 챗봇 서버 실행 중"})
 
-# ✅ 스트리밍 기반 단일 엔드포인트
+# ✅ 챗봇 스트리밍 엔드포인트
 @app.post("/chat/stream")
 async def chat_stream(request: Request):
     data = await request.json()
     state = AgentState(**data.get("state", {}))
 
     async def async_gen():
+        if not model_ready:
+            yield "⚠️ 모델이 아직 준비되지 않았습니다.\n".encode("utf-8")
+            return
+
         if state.stage == "empathy":
-            async for chunk in stream_empathy_reply(state.question.strip()):
-                yield chunk  # ✅ 이미 bytes인 경우 그대로 yield
+            async for chunk in stream_empathy_reply(state.question.strip(), model_paths["base"]):
+                yield chunk
             yield b"\n---END_STAGE---\n" + json.dumps({"next_stage": "mi"}).encode("utf-8")
 
         elif state.stage == "mi":
-            async for chunk in stream_mi_reply(state):
+            async for chunk in stream_mi_reply(state, model_paths["mi"]):
                 yield chunk
 
         elif state.stage == "s_turn":
-            async for chunk in stream_s_turn_reply(state):
+            async for chunk in stream_s_turn_reply(state, model_paths["base"]):  # 아직 모델 직접 사용 안함
                 yield chunk
 
         elif state.stage == "cbt":
-            async for chunk in stream_cbt_reply(state):
+            async for chunk in stream_cbt_reply(state, model_paths["cbt"]):
                 yield chunk
 
         elif state.stage in ["ppi", "action"]:
-            async for chunk in stream_ppi_reply(state):
+            async for chunk in stream_ppi_reply(state, model_paths["ppi"]):
                 yield chunk
 
         else:
