@@ -52,11 +52,11 @@ async def set_model_paths():
         print("📂 사전 다운로드된 모델 경로 등록 중...")
 
         model_paths = {
-            "base": "/root/.cache/huggingface/hub/models--youngbongbong--mimodel/snapshots/bcc716f72bff0d9a747ad298ade5aecd589e347e/merged-mi-chat-q4_k_m.gguf",
-            "cbt": "/root/.cache/huggingface/hub/models--youngbongbong--cbtmodel/snapshots/2f61830479aa6720c9d00ef3d3fc00dbae6fbc7a/merged-cbt-chat-q4_k_m.gguf",
-            "mi": "/root/.cache/huggingface/hub/models--youngbongbong--ppimodel/snapshots/bcc716f72bff0d9a747ad298ade5aecd589e347e/merged-ppi-prep-chat-q4_k_m.gguf",
-            "ppi": "/root/.cache/huggingface/hub/models--youngbongbong--ppimodel/snapshots/7d2a76cfc9bc6568f2e7cab628d3b0d2a3c8f69/merged-ppi-prep-chat-q4_k_m.gguf"
-        }
+    "base": "/root/.cache/huggingface/hub/models--youngbongbong--mimodel/snapshots/bcc716f72bff0d9a747ad298ade5aecd589e347e/merged-mi-chat-q4_k_m.gguf",
+    "cbt": "/root/.cache/huggingface/hub/models--youngbongbong--cbtmodel/snapshots/2f61830479aa6720c9d00ef3d3fc00dbae6fbc7a/merged-cbt-chat-q4_k_m.gguf",
+    "mi": "/root/.cache/huggingface/hub/models--youngbongbong--ppimodel/snapshots/7d2a76cfc9bc6568f2e7cab628d3b0d2a3c8f69/merged-ppi-prep-chat-q4_k_m.gguf",
+    "ppi": "/root/.cache/huggingface/hub/models--youngbongbong--ppimodel/snapshots/7d2a76cfc9bc6568f2e7cab628d3b0d2a3c8f69/merged-ppi-prep-chat-q4_k_m.gguf"
+}
 
         model_ready = True
         print("✅ 모델 경로 등록 완료")
