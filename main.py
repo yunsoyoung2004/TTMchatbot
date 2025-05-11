@@ -4,7 +4,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Literal, List, Optional
 import json, os, asyncio
-from huggingface_hub import hf_hub_download
 
 # ✅ FastAPI 인스턴스는 단 1회 선언
 app = FastAPI()
@@ -45,48 +44,25 @@ from agents.action_agent import stream_ppi_reply
 model_ready = False
 model_paths = {}
 
-# ✅ 모델 다운로드
+# ✅ 모델 경로 설정만 (다운로드 없음)
 @app.on_event("startup")
-async def load_all_models():
+async def set_model_paths():
     global model_ready, model_paths
     try:
-        print("⏳ Hugging Face에서 모델 다운로드 중...")
-        hf_token = os.environ.get("HUGGINGFACE_TOKEN")
+        print("📂 사전 다운로드된 모델 경로 등록 중...")
 
-        models_to_download = {
-            "base": {
-                "repo_id": "youngbongbong/mimodel",
-                "filename": "merged-mi-chat-q4_k_m.gguf",
-            },
-            "cbt": {
-                "repo_id": "youngbongbong/cbtmodel",
-                "filename": "merged-cbt-chat-q4_k_m.gguf",
-            },
-            "mi": {
-                "repo_id": "youngbongbong/ppimodel",
-                "filename": "merged-ppi-prep-chat-q4_k_m.gguf",
-            },
-            "ppi": {
-                "repo_id": "youngbongbong/ppimodel",
-                "filename": "merged-ppi-prep-chat-q4_k_m.gguf",
-            }
+        model_paths = {
+            "base": "/root/.cache/huggingface/hub/models--youngbongbong--mimodel/snapshots/xxxxxx/merged-mi-chat-q4_k_m.gguf",
+            "cbt": "/root/.cache/huggingface/hub/models--youngbongbong--cbtmodel/snapshots/yyyyyy/merged-cbt-chat-q4_k_m.gguf",
+            "mi": "/root/.cache/huggingface/hub/models--youngbongbong--ppimodel/snapshots/zzzzzz/merged-ppi-prep-chat-q4_k_m.gguf",
+            "ppi": "/root/.cache/huggingface/hub/models--youngbongbong--ppimodel/snapshots/zzzzzz/merged-ppi-prep-chat-q4_k_m.gguf"
         }
 
-        for key, meta in models_to_download.items():
-            print(f"📥 {key} 모델 다운로드 중...")
-            path = hf_hub_download(
-                repo_id=meta["repo_id"],
-                filename=meta["filename"],
-                token=hf_token
-            )
-            model_paths[key] = path
-            print(f"✅ {key} 모델 경로: {path}")
-
         model_ready = True
-        print("🎉 모든 모델 다운로드 및 경로 등록 완료")
+        print("✅ 모델 경로 등록 완료")
 
     except Exception as e:
-        print(f"❌ 모델 다운로드 실패: {e}")
+        print(f"❌ 모델 경로 설정 실패: {e}")
         model_ready = False
 
 # ✅ 상태 확인용 라우터

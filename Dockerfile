@@ -1,36 +1,31 @@
 FROM python:3.11-slim-bullseye
 
-# ✅ 시스템 필수 패키지 설치
+# 시스템 도구 설치
 RUN apt-get update && apt-get install -y \
-    build-essential \
-    cmake \
-    gcc \
-    g++ \
-    git \
-    curl \
-    pkg-config \
-    python3-dev \
+    build-essential cmake gcc g++ git curl pkg-config python3-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# ✅ 설치 확인 (디버깅용)
-RUN which gcc && gcc --version && which g++
+# Hugging Face 인증 토큰 환경 변수 등록
+ENV HUGGINGFACE_TOKEN=hf_your_token_here
 
-# ✅ CMake가 사용할 컴파일러를 명시적으로 설정
-ENV CC=/usr/bin/gcc
-ENV CXX=/usr/bin/g++
-
-# ✅ pip 최신화
+# pip 최신화 및 의존성 설치
 RUN pip install --upgrade pip setuptools wheel
-
-# ✅ 작업 디렉토리 설정
-WORKDIR /app
-
-# ✅ requirements 설치 (pyproject.toml 빌드 포함 패키지 대응)
 COPY requirements.txt .
-RUN pip install --prefer-binary --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# ✅ 앱 코드 복사
+# 모델 미리 다운로드
+RUN python -c "from huggingface_hub import hf_hub_download; \
+    hf_hub_download(repo_id='youngbongbong/mimodel', filename='merged-mi-chat-q4_k_m.gguf', token='$HUGGINGFACE_TOKEN')"
+
+RUN python -c "from huggingface_hub import hf_hub_download; \
+    hf_hub_download(repo_id='youngbongbong/cbtmodel', filename='merged-cbt-chat-q4_k_m.gguf', token='$HUGGINGFACE_TOKEN')"
+
+RUN python -c "from huggingface_hub import hf_hub_download; \
+    hf_hub_download(repo_id='youngbongbong/ppimodel', filename='merged-ppi-prep-chat-q4_k_m.gguf', token='$HUGGINGFACE_TOKEN')"
+
+# 앱 디렉토리 복사
+WORKDIR /app
 COPY . .
 
-# ✅ FastAPI 앱 실행
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+# 포트 8080 리슨
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
