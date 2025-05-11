@@ -23,7 +23,7 @@ SOCRATIC_QUESTIONS = [
 ]
 
 # ✅ 스트리밍 응답 생성기
-async def stream_s_turn_reply(state: AgentState, model_path: str) -> AsyncGenerator[str, None]:
+async def stream_s_turn_reply(state: AgentState) -> AsyncGenerator[str, None]:
     user_input = state.question.strip()
     history = state.history or []
     turn = state.turn
@@ -107,7 +107,7 @@ async def chat_s_turn_stream(request: Request):
     state = AgentState(**data["state"])
 
     async def wrapped_generator():
-        async for chunk in stream_s_turn_reply(state, model_path="dummy"):
+        async for chunk in stream_s_turn_reply(state):
             yield chunk.encode("utf-8")
 
     return StreamingResponse(wrapped_generator(), media_type="text/event-stream")

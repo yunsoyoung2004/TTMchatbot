@@ -1,17 +1,23 @@
 from llama_cpp import Llama
 from typing import Literal, List, Optional, AsyncGenerator
 from pydantic import BaseModel
+from huggingface_hub import hf_hub_download
 import os, json, multiprocessing, difflib, re
 
 # ✅ 전역 모델 인스턴스 캐싱
-LLM_PPI_INSTANCE = None
+LLM_PPI_INSTANCE = {}
 
-def load_ppi_model(model_path: str):
+def load_ppi_model(repo_id: str, filename: str = "merged-ppi-prep-chat-q4_k_m.gguf"):
     global LLM_PPI_INSTANCE
-    if LLM_PPI_INSTANCE is None:
+    if repo_id not in LLM_PPI_INSTANCE:
         print("🚀 PPI 모델 최초 로딩 중...")
+        model_path = hf_hub_download(
+            repo_id=repo_id,
+            filename=filename,
+            token=os.getenv("HUGGINGFACE_TOKEN")
+        )
         NUM_THREADS = max(1, multiprocessing.cpu_count() - 1)
-        LLM_PPI_INSTANCE = Llama(
+        LLM_PPI_INSTANCE[repo_id] = Llama(
             model_path=model_path,
             n_ctx=384,
             n_threads=NUM_THREADS,
@@ -27,8 +33,8 @@ def load_ppi_model(model_path: str):
             chat_format="llama-3",
             stop=["User:", "Assistant:"]
         )
-        print("✅ PPI 모델 로딩 완료")
-    return LLM_PPI_INSTANCE
+        print(f"✅ PPI 모델 로딩 완료: {model_path}")
+    return LLM_PPI_INSTANCE[repo_id]
 
 # ✅ 상태 모델 정의
 class AgentState(BaseModel):
@@ -65,7 +71,7 @@ def get_fallback_plan(turn: int) -> str:
     return fallback[turn % len(fallback)]
 
 # ✅ PPI 응답 생성
-async def stream_ppi_reply(state: AgentState, model_path: str) -> AsyncGenerator[bytes, None]:
+async def stream_ppi_reply(state: AgentState, repo_id: str) -> AsyncGenerator[bytes, None]:
     user_input = state.question.strip()
 
     # ✅ 첫 인트로 메시지
@@ -97,7 +103,7 @@ async def stream_ppi_reply(state: AgentState, model_path: str) -> AsyncGenerator
         return
 
     try:
-        llm_ppi = load_ppi_model(model_path)
+        llm_ppi = load_ppi_model(repo_id)
 
         instruction = (
             "당신은 긍정 심리 기반 실천 코치입니다. "

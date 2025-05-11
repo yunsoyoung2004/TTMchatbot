@@ -1,14 +1,16 @@
-from llama_cpp import Llama
+from llama_cpp import Llama 
 import os, re, json
 from typing import AsyncGenerator
+from huggingface_hub import hf_hub_download
 
-LLM_INSTANCE = None
+LLM_INSTANCE = {}
 
-def load_llama_model(model_path: str):
+def load_llama_model(repo_id: str, filename: str = "merged-mi-chat-q4_k_m.gguf") -> Llama:
     global LLM_INSTANCE
-    if LLM_INSTANCE is None:
-        print("🚀 Llama 모델 최초 로딩 중...")
-        LLM_INSTANCE = Llama(
+    if repo_id not in LLM_INSTANCE:
+        print(f"🚀 모델 로딩 시작: {repo_id}")
+        model_path = hf_hub_download(repo_id=repo_id, filename=filename, token=os.getenv("HUGGINGFACE_TOKEN"))
+        LLM_INSTANCE[repo_id] = Llama(
             model_path=model_path,
             n_ctx=256,
             n_threads=os.cpu_count(),
@@ -24,8 +26,8 @@ def load_llama_model(model_path: str):
             chat_format="llama-3",
             stop=["<|im_end|>"]
         )
-        print("✅ Llama 모델 로딩 완료")
-    return LLM_INSTANCE
+        print(f"✅ Llama 로딩 완료: {model_path}")
+    return LLM_INSTANCE[repo_id]
 
 def deduplicate_streaming_text(text: str) -> str:
     sentences = re.split(r'(?<=[.?!])\s+', text.strip())
@@ -44,7 +46,7 @@ def polish_sentence(text: str) -> str:
         text += " 천천히 더 이야기해 주셔도 괜찮습니다."
     return text
 
-async def stream_empathy_reply(user_input: str, model_path: str) -> AsyncGenerator[bytes, None]:
+async def stream_empathy_reply(user_input: str, repo_id: str) -> AsyncGenerator[bytes, None]:
     user_input = user_input.strip()
     print(f"🟡 사용자 입력 수신: '{user_input}'")
 
@@ -57,7 +59,7 @@ async def stream_empathy_reply(user_input: str, model_path: str) -> AsyncGenerat
 
     try:
         print("🔄 모델 로딩 시작")
-        llm = load_llama_model(model_path)
+        llm = load_llama_model(repo_id)
         print("✅ 모델 로딩 완료")
 
         system_prompt = (
@@ -103,4 +105,3 @@ async def stream_empathy_reply(user_input: str, model_path: str) -> AsyncGenerat
             "next_stage": "mi",
             "response": "죄송합니다. 다시 말씀해 주실 수 있을까요?"
         }, ensure_ascii=False).encode("utf-8")
-
