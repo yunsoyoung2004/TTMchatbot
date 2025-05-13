@@ -30,9 +30,9 @@ async def download_all_models():
     REPOS = {
             "base": ("MLP-KTLim/llama-3-Korean-Bllossom-8B-gguf-Q4_K_M", "llama-3-Korean-Bllossom-8B-Q4_K_M.gguf"),
             "mi":   ("youngbongbong/mimodel", "merged-mi-chat-q4_k_m.gguf"),
-            "cbt1": ("youngbongbong/cbtmodel", "merged-cbt1-chat-q4_k_m.gguf"),
-            "cbt2": ("youngbongbong/cbtmodel", "merged-cbt2-chat-q4_k_m.gguf"),
-            "cbt3": ("youngbongbong/cbtmodel", "merged-cbt3-chat-q4_k_m.gguf"),
+            "cbt1": ("youngbongbong/cbt1model", "merged-cbt1-chat-q4_k_m.gguf"),
+            "cbt2": ("youngbongbong/cbt2model", "merged-cbt2-chat-q4_k_m.gguf"),
+            "cbt3": ("youngbongbong/cbt3model", "merged-cbt3-chat-q4_k_m.gguf"),
             "ppi":  ("youngbongbong/ppimodel", "merged-ppi-prep-chat-q4_k_m.gguf"),
         }
 
