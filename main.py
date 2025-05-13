@@ -6,13 +6,11 @@ from typing import Literal, List, Optional
 import json, os, asyncio
 from huggingface_hub import hf_hub_download
 
-# ✅ 모델 경로 저장소
+# ✅ 미리 로드된 모델 경로 저장되는 바로 바바
 MODEL_PATHS = {}
 
-# ✅ FastAPI 인스턴스 생성
 app = FastAPI()
 
-# ✅ CORS 설정
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -21,7 +19,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ✅ 모델 다운로드 로직 (startup.py 대체)
 @app.on_event("startup")
 async def download_all_models():
     print("📦 모델 다운로드 시작")
@@ -31,26 +28,28 @@ async def download_all_models():
         return
 
     REPOS = {
-        "mi":   ("youngbongbong/mimodel", "merged-mi-chat-q4_k_m.gguf"),
-        "cbt":  ("youngbongbong/cbtmodel", "merged-cbt-chat-q4_k_m.gguf"),
-        "ppi":  ("youngbongbong/ppimodel", "merged-ppi-prep-chat-q4_k_m.gguf"),
-        "base": ("youngbongbong/mimodel", "merged-mi-chat-q4_k_m.gguf"),
-    }
+            "base": ("MLP-KTLim/llama-3-Korean-Bllossom-8B-gguf-Q4_K_M", "llama-3-Korean-Bllossom-8B-Q4_K_M.gguf"),
+            "mi":   ("youngbongbong/mimodel", "merged-mi-chat-q4_k_m.gguf"),
+            "cbt1": ("youngbongbong/cbtmodel", "merged-cbt1-chat-q4_k_m.gguf"),
+            "cbt2": ("youngbongbong/cbtmodel", "merged-cbt2-chat-q4_k_m.gguf"),
+            "cbt3": ("youngbongbong/cbtmodel", "merged-cbt3-chat-q4_k_m.gguf"),
+            "ppi":  ("youngbongbong/ppimodel", "merged-ppi-prep-chat-q4_k_m.gguf"),
+        }
+
 
     for name, (repo, file) in REPOS.items():
         path = hf_hub_download(repo_id=repo, filename=file, token=token)
         MODEL_PATHS[name] = path
         print(f"✅ {name.upper()} 모델 경로 등록: {path}")
 
-    asyncio.create_task(dummy_loop())  # keep-alive loop도 이곳에 포함
+    asyncio.create_task(dummy_loop())
 
 async def dummy_loop():
     while True:
         await asyncio.sleep(3600)
 
-# ✅ 상태 모델
 class AgentState(BaseModel):
-    stage: Literal["empathy", "mi", "s_turn", "cbt", "ppi", "action", "end"]
+    stage: Literal["empathy", "mi", "cbt1", "cbt2", "cbt3", "ppi", "action", "end"]
     question: str
     response: str
     history: List[str]
@@ -64,21 +63,18 @@ class AgentState(BaseModel):
 class ChatRequest(BaseModel):
     state: AgentState
 
-# ✅ 에이전트 import
 from agents.empathy_agent import stream_empathy_reply
 from agents.mi_agent import stream_mi_reply
-from agents.s_turn_agent import stream_s_turn_reply
-from agents.cbt_agent import stream_cbt_reply
+from agents.cbt1_agent import stream_cbt_reply
 from agents.action_agent import stream_ppi_reply
 
-# ✅ 모델 준비 상태 확인
 @app.get("/status")
 def check_model_status():
     return {"ready": bool(MODEL_PATHS)}
 
 @app.get("/")
 def root():
-    return JSONResponse({"message": "✅ TTM 멀티에이전트 챗봇 서버 실행 중"})
+    return JSONResponse({"message": "✅ TTM 머티에이정트 채팅 서버 실행 중"})
 
 @app.head("/")
 def root_head():
@@ -102,18 +98,27 @@ async def chat_stream(request: Request):
         elif state.stage == "mi":
             async for chunk in stream_mi_reply(state, MODEL_PATHS["mi"]):
                 yield chunk
+            yield b"\n---END_STAGE---\n" + json.dumps({"next_stage": "cbt1"}).encode("utf-8")
 
-        elif state.stage == "s_turn":
-            async for chunk in stream_s_turn_reply(state, MODEL_PATHS["base"]):
+        elif state.stage == "cbt1":
+            async for chunk in stream_cbt_reply(state, MODEL_PATHS["cbt1"]):
                 yield chunk
+            yield b"\n---END_STAGE---\n" + json.dumps({"next_stage": "cbt2"}).encode("utf-8")
 
-        elif state.stage == "cbt":
-            async for chunk in stream_cbt_reply(state, MODEL_PATHS["cbt"]):
+        elif state.stage == "cbt2":
+            async for chunk in stream_cbt_reply(state, MODEL_PATHS["cbt2"]):
                 yield chunk
+            yield b"\n---END_STAGE---\n" + json.dumps({"next_stage": "cbt3"}).encode("utf-8")
+
+        elif state.stage == "cbt3":
+            async for chunk in stream_cbt_reply(state, MODEL_PATHS["cbt3"]):
+                yield chunk
+            yield b"\n---END_STAGE---\n" + json.dumps({"next_stage": "ppi"}).encode("utf-8")
 
         elif state.stage in ["ppi", "action"]:
             async for chunk in stream_ppi_reply(state, MODEL_PATHS["ppi"]):
                 yield chunk
+            yield b"\n---END_STAGE---\n" + json.dumps({"next_stage": "end"}).encode("utf-8")
 
         else:
             yield "⚠️ 현재 단계에서 스트리밍 응답이 지원되지 않습니다.\n".encode("utf-8")
@@ -121,7 +126,6 @@ async def chat_stream(request: Request):
 
     return StreamingResponse(async_gen(), media_type="text/plain")
 
-# ✅ 로컬 실행
 if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 8080))
