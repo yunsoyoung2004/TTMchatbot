@@ -1,18 +1,17 @@
 import os, json, re, difflib, multiprocessing
 from typing import AsyncGenerator, Literal, List, Optional
 from pydantic import BaseModel
-from huggingface_hub import hf_hub_download
 from llama_cpp import Llama
 
 # ✅ 전역 모델 캐시
 LLM_MI_INSTANCE = {}
 
-def load_mi_model(repo_id: str, filename: str = "merged-mi-chat-q4_k_m.gguf"):
+# ✅ 모델 로더 (model_path 기반)
+def load_mi_model(model_path: str) -> Llama:
     global LLM_MI_INSTANCE
-    if repo_id not in LLM_MI_INSTANCE:
+    if model_path not in LLM_MI_INSTANCE:
         print("🚀 MI 모델 최초 로딩 중...")
-        model_path = hf_hub_download(repo_id=repo_id, filename=filename, token=os.getenv("HUGGINGFACE_TOKEN"))
-        LLM_MI_INSTANCE[repo_id] = Llama(
+        LLM_MI_INSTANCE[model_path] = Llama(
             model_path=model_path,
             n_ctx=256,
             n_threads=max(1, multiprocessing.cpu_count() - 1),
@@ -32,7 +31,7 @@ def load_mi_model(repo_id: str, filename: str = "merged-mi-chat-q4_k_m.gguf"):
             stop=["<|im_end|>", "\n\n"]
         )
         print("✅ MI 모델 로딩 완료")
-    return LLM_MI_INSTANCE[repo_id]
+    return LLM_MI_INSTANCE[model_path]
 
 # ✅ 상태 정의
 class AgentState(BaseModel):
@@ -92,7 +91,7 @@ def get_fallback_question(turn: int) -> str:
     return fallback[turn % len(fallback)]
 
 # ✅ MI 응답 생성 함수
-async def stream_mi_reply(state: AgentState, repo_id: str) -> AsyncGenerator[bytes, None]:
+async def stream_mi_reply(state: AgentState, model_path: str) -> AsyncGenerator[bytes, None]:
     user_input = state.question.strip()
 
     if state.turn == 0 and not state.intro_shown:
@@ -122,7 +121,7 @@ async def stream_mi_reply(state: AgentState, repo_id: str) -> AsyncGenerator[byt
         return
 
     try:
-        llm = load_mi_model(repo_id)
+        llm = load_mi_model(model_path)
 
         messages = [{"role": "system", "content": get_system_prompt(state.turn)}]
         if len(state.history) >= 4:

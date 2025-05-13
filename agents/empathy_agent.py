@@ -1,16 +1,19 @@
-from llama_cpp import Llama 
-import os, re, json
-from typing import AsyncGenerator
-from huggingface_hub import hf_hub_download
+# agents/empathy_agent.py
 
+import os
+import re
+import json
+from typing import AsyncGenerator
+from llama_cpp import Llama
+
+# ✅ 인스턴스 캐시
 LLM_INSTANCE = {}
 
-def load_llama_model(repo_id: str, filename: str = "merged-mi-chat-q4_k_m.gguf") -> Llama:
-    global LLM_INSTANCE
-    if repo_id not in LLM_INSTANCE:
-        print(f"🚀 모델 로딩 시작: {repo_id}")
-        model_path = hf_hub_download(repo_id=repo_id, filename=filename, token=os.getenv("HUGGINGFACE_TOKEN"))
-        LLM_INSTANCE[repo_id] = Llama(
+# ✅ model_path 기반 로딩 함수
+def load_llama_model(model_path: str) -> Llama:
+    if model_path not in LLM_INSTANCE:
+        print(f"🚀 모델 로딩 시작: {model_path}")
+        LLM_INSTANCE[model_path] = Llama(
             model_path=model_path,
             n_ctx=256,
             n_threads=os.cpu_count(),
@@ -26,9 +29,10 @@ def load_llama_model(repo_id: str, filename: str = "merged-mi-chat-q4_k_m.gguf")
             chat_format="llama-3",
             stop=["<|im_end|>"]
         )
-        print(f"✅ Llama 로딩 완료: {model_path}")
-    return LLM_INSTANCE[repo_id]
+        print(f"✅ 모델 로딩 완료: {model_path}")
+    return LLM_INSTANCE[model_path]
 
+# ✅ 중복 제거
 def deduplicate_streaming_text(text: str) -> str:
     sentences = re.split(r'(?<=[.?!])\s+', text.strip())
     seen, result = set(), []
@@ -39,6 +43,7 @@ def deduplicate_streaming_text(text: str) -> str:
             result.append(s)
     return ' '.join(result)
 
+# ✅ 문장 다듬기
 def polish_sentence(text: str) -> str:
     if not re.search(r"(요|죠|네요|가요)[.?!]?$", text.strip()):
         text = text.strip() + " 괜찮으셨을까요?"
@@ -46,7 +51,8 @@ def polish_sentence(text: str) -> str:
         text += " 천천히 더 이야기해 주셔도 괜찮습니다."
     return text
 
-async def stream_empathy_reply(user_input: str, repo_id: str) -> AsyncGenerator[bytes, None]:
+# ✅ 스트리밍 응답
+async def stream_empathy_reply(user_input: str, model_path: str) -> AsyncGenerator[bytes, None]:
     user_input = user_input.strip()
     print(f"🟡 사용자 입력 수신: '{user_input}'")
 
@@ -58,9 +64,7 @@ async def stream_empathy_reply(user_input: str, repo_id: str) -> AsyncGenerator[
         return
 
     try:
-        print("🔄 모델 로딩 시작")
-        llm = load_llama_model(repo_id)
-        print("✅ 모델 로딩 완료")
+        llm = load_llama_model(model_path)
 
         system_prompt = (
             "당신은 따뜻하고 공감 잘하는 상담자입니다. "
@@ -79,7 +83,6 @@ async def stream_empathy_reply(user_input: str, repo_id: str) -> AsyncGenerator[
 
         for chunk in llm.create_chat_completion(messages=messages, stream=True):
             token = chunk["choices"][0]["delta"].get("content", "")
-            print(f"📤 토큰 수신 중: '{token}'")
             if token:
                 full_response += token
                 if not first_token_sent:
@@ -87,7 +90,6 @@ async def stream_empathy_reply(user_input: str, repo_id: str) -> AsyncGenerator[
                     first_token_sent = True
                 yield token.encode("utf-8")
 
-        print(f"🧹 전체 응답 정제 전: '{full_response.strip()}'")
         cleaned = deduplicate_streaming_text(full_response.strip())
         polished = polish_sentence(cleaned)
         print(f"✨ 정제된 최종 응답: '{polished}'")

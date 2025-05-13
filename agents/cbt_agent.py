@@ -1,19 +1,18 @@
 from llama_cpp import Llama
 from typing import Literal, List, Optional, AsyncGenerator
 from pydantic import BaseModel
-from huggingface_hub import hf_hub_download
 import os, json, multiprocessing
 
 # ✅ 전역 모델 인스턴스 캐시
 LLM_CBT_INSTANCE = {}
 
-def load_cbt_model(repo_id: str, filename: str = "merged-cbt-chat-q4_k_m.gguf") -> Llama:
+# ✅ 모델 로딩 함수 (model_path 기반)
+def load_cbt_model(model_path: str) -> Llama:
     global LLM_CBT_INSTANCE
-    if repo_id not in LLM_CBT_INSTANCE:
+    if model_path not in LLM_CBT_INSTANCE:
         print("🚀 CBT Llama 모델 최초 로딩 중...")
-        model_path = hf_hub_download(repo_id=repo_id, filename=filename, token=os.getenv("HUGGINGFACE_TOKEN"))
         NUM_THREADS = max(1, multiprocessing.cpu_count() - 1)
-        LLM_CBT_INSTANCE[repo_id] = Llama(
+        LLM_CBT_INSTANCE[model_path] = Llama(
             model_path=model_path,
             n_threads=NUM_THREADS,
             n_ctx=384,
@@ -30,7 +29,7 @@ def load_cbt_model(repo_id: str, filename: str = "merged-cbt-chat-q4_k_m.gguf") 
             stop=["User:", "Assistant:"]
         )
         print(f"✅ CBT 모델 로딩 완료: {model_path}")
-    return LLM_CBT_INSTANCE[repo_id]
+    return LLM_CBT_INSTANCE[model_path]
 
 # ✅ 상태 모델
 class AgentState(BaseModel):
@@ -44,7 +43,7 @@ class AgentState(BaseModel):
     pending_response: Optional[str] = None
 
 # ✅ CBT 스트리밍 응답 함수
-async def stream_cbt_reply(state: AgentState, repo_id: str) -> AsyncGenerator[bytes, None]:
+async def stream_cbt_reply(state: AgentState, model_path: str) -> AsyncGenerator[bytes, None]:
     user_input = state.question.strip()
 
     if state.turn == 0 and not state.intro_shown:
@@ -75,7 +74,7 @@ async def stream_cbt_reply(state: AgentState, repo_id: str) -> AsyncGenerator[by
         return
 
     try:
-        llm_cbt = load_cbt_model(repo_id)
+        llm_cbt = load_cbt_model(model_path)
 
         messages = [
             {"role": "system", "content": (
