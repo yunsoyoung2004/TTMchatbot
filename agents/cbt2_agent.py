@@ -3,6 +3,9 @@ from typing import Literal, List, Optional, AsyncGenerator
 from pydantic import BaseModel
 import os, json, multiprocessing
 
+# ✅ 페르소나 드리프트 감지
+from utils.drift_detector import detect_persona_drift
+
 LLM_CBT_INSTANCE = {}
 
 def load_cbt_model(model_path: str) -> Llama:
@@ -30,7 +33,7 @@ def load_cbt_model(model_path: str) -> Llama:
     return LLM_CBT_INSTANCE[model_path]
 
 class AgentState(BaseModel):
-    stage: Literal["cbt2", "cbt3", "action"]
+    stage: Literal["cbt2", "cbt3", "mi", "action"]
     question: str
     response: str
     history: List[str]
@@ -39,13 +42,25 @@ class AgentState(BaseModel):
     awaiting_s_turn_decision: bool
     pending_response: Optional[str] = None
 
+def get_cbt2_system_prompt() -> str:
+    return (
+        "당신은 소크라테스형 CBT 중반부 상담자입니다. "
+        "사용자가 자동사고와 인지 왜곡을 스스로 인식하고 정리할 수 있도록 질문 위주로 대화를 이끌어 주세요.\n"
+        "1) 자동사고 도전 및 재구성\n"
+        "2) 인지 왜곡 탐색 및 근거 도전\n"
+        "3) 대안적 사고 탐색 (검증된 믿음, 다른 해석, 효과 평가)\n"
+        "4) 새로운 사고 적용 연습\n\n"
+        "말투는 정중하되 질문은 명확하고 사고를 자극하도록 구성해 주세요."
+    )
+
 async def stream_cbt2_reply(state: AgentState, model_path: str) -> AsyncGenerator[bytes, None]:
     user_input = state.question.strip()
 
+    # ✅ 첫 턴 도입 멘트
     if state.turn == 0 and not state.intro_shown:
         intro = (
-            "이번 단계에서는 갈망 대처나 자기통제 같은 기술들을 연습해볼 거예요."
-            "최근 있었던 상황 중 하나를 떠올리며 함께 적용해볼까요?"
+            "이제부터는 우리가 자동사고와 인지 왜곡을 함께 탐색해볼 거예요. "
+            "최근에 떠올랐던 생각 중 반복되거나 강하게 느껴졌던 생각이 있다면 알려주시겠어요?"
         )
         yield intro.encode("utf-8")
         yield b"\n---END_STAGE---\n" + json.dumps({
@@ -59,8 +74,9 @@ async def stream_cbt2_reply(state: AgentState, model_path: str) -> AsyncGenerato
         }, ensure_ascii=False).encode("utf-8")
         return
 
+    # ✅ 빈 질문 대응
     if not user_input:
-        fallback = "최근 갈망을 느꼈던 상황이 있다면 이야기해보셔도 좋아요."
+        fallback = "최근 떠올랐던 반복적인 생각이나 걱정이 있었다면 말씀해 주세요."
         yield fallback.encode("utf-8")
         yield b"\n---END_STAGE---\n" + json.dumps({
             "next_stage": state.stage,
@@ -71,19 +87,8 @@ async def stream_cbt2_reply(state: AgentState, model_path: str) -> AsyncGenerato
 
     try:
         llm = load_cbt_model(model_path)
-        messages = [
-            {"role": "system", "content": (
-                """너는 약물중독 CBT 중반부 기술훈련 세션을 맡은 상담자야.
-다음의 흐름에 따라 대화를 구성해:
-1) 오늘 다룰 기술 주제 연결 (예: 갈망 대처)
-2) 최근 사건과 기술 연결
-3) 역할극이나 구체적 상황 설정
-4) 기술 이해도 점검
-다정하고 격려하는 톤으로, 역할극 대화도 포함시켜줘.
-예: '같이 연습해볼까요?', '그 기술을 어떻게 적용하면 좋을까요?'
-반드시 존댓말로 1문단 이내로 마무리해줘."""
-            )}
-        ]
+
+        messages = [{"role": "system", "content": get_cbt2_system_prompt()}]
         if len(state.history) >= 2:
             messages.append({"role": "user", "content": state.history[-2]})
             messages.append({"role": "assistant", "content": state.history[-1]})
@@ -106,20 +111,29 @@ async def stream_cbt2_reply(state: AgentState, model_path: str) -> AsyncGenerato
         return
 
     reply = buffer.strip()
+
     if not reply.endswith(("다.", "요.", "죠?", "나요?", "까요?", "습니까?")):
-        reply += " 혹시 지금 떠오르는 상황이 있으신가요?"
+        reply += " 어떻게 생각하세요?"
 
     if state.history and reply == state.history[-1].strip():
-        reply = "그 상황을 조금 다르게 설정해서 다시 연습해볼까요?"
+        reply = "이번에는 조금 다른 관점에서 다시 질문해볼게요."
 
-    next_turn = state.turn + 1
-    next_stage = "cbt3" if next_turn >= 6 else "cbt2"
-    if next_stage == "cbt3":
-        reply += "\n\n📘 훈련이 잘 되셨어요. 다음 단계로 넘어가 보겠습니다."
+    # ✅ 드리프트 감지
+    drifted = detect_persona_drift("cbt2", reply)
+    if drifted:
+        reply += "\n\n⚠️ 시스템 알림: 교사 역할이 불안정해졌습니다. MI 단계로 돌아가겠습니다."
+        next_stage = "mi"
+        turn = 0
+    else:
+        next_turn = state.turn + 1
+        next_stage = "cbt3" if next_turn >= 10 else "cbt2"
+        turn = 0 if next_stage != "cbt2" else next_turn
+        if next_stage == "cbt3":
+            reply += "\n\n📘 아주 잘 하셨어요. 이제 마지막 단계에서 실천 계획을 세워보겠습니다."
 
     yield b"\n---END_STAGE---\n" + json.dumps({
         "next_stage": next_stage,
-        "turn": 0 if next_stage != "cbt2" else next_turn,
+        "turn": turn,
         "response": reply,
         "question": "",
         "intro_shown": True,

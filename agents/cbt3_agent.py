@@ -1,7 +1,10 @@
 from llama_cpp import Llama
 from typing import Literal, List, Optional, AsyncGenerator
 from pydantic import BaseModel
-import os, json, multiprocessing
+import os, json, multiprocessing, random
+
+# ✅ 페르소나 드리프트 감지 유틸
+from utils.drift_detector import detect_persona_drift
 
 LLM_CBT_INSTANCE = {}
 
@@ -30,7 +33,7 @@ def load_cbt_model(model_path: str) -> Llama:
     return LLM_CBT_INSTANCE[model_path]
 
 class AgentState(BaseModel):
-    stage: Literal["cbt3", "action"]
+    stage: Literal["cbt3", "action", "mi"]
     question: str
     response: str
     history: List[str]
@@ -44,7 +47,7 @@ async def stream_cbt3_reply(state: AgentState, model_path: str) -> AsyncGenerato
 
     if state.turn == 0 and not state.intro_shown:
         intro = (
-            "이제 마지막 단계입니다. 이번 주에 실천할 수 있는 과제를 함께 정하고,"
+            "이제 마지막 단계입니다. 이번 주에 실천할 수 있는 과제를 함께 정하고, "
             "예상되는 방해요소나 고위험 상황에 대한 대처 계획도 세워볼 거예요."
         )
         yield intro.encode("utf-8")
@@ -71,17 +74,35 @@ async def stream_cbt3_reply(state: AgentState, model_path: str) -> AsyncGenerato
 
     try:
         llm = load_cbt_model(model_path)
+
+        predefined_questions = {
+            3: "친한 친구가 같은 고민을 한다면, 뭐라고 해줄까요?",
+            5: "앞으로 내가 할 수 있는 일은 무엇일까요?"
+        }
+        if state.turn in predefined_questions:
+            user_input += f"\n\n{predefined_questions[state.turn]}"
+
+        ppi_prompts = [
+            "요즘 감사한 일이 있었나요?",
+            "나의 강점 중 이번 과제에 도움이 될 수 있는 건 뭘까요?",
+            "과거에 비슷한 상황에서 잘했던 경험이 있다면요?"
+        ]
+        if state.turn in [2, 4]:
+            user_input += f"\n\n{random.choice(ppi_prompts)}"
+
         messages = [
             {"role": "system", "content": (
-                """너는 약물중독 CBT 후반부 상담자야. 지금은 과제 설정과 실행계획을 세우는 시간이고, 다음 흐름을 따라 대화를 구성해:
-1) 맞춤형 과제 목표 설정
-2) 구체적 실천 계획(언제/어디서/어떻게)
-3) 예상 방해요인 및 해결책 토의
-4) 고위험 상황에 대한 시뮬레이션 및 대처전략
-말 끝을 존댓말로 하고, 실제 일상에 적용 가능한 실천 질문을 포함해줘.
-예: '언제 이걸 실천해보면 좋을까요?', '방해가 된다면 어떤 대안을 써볼 수 있을까요?'"""
+                "당신은 숙련된 CBT 코치입니다. 지금은 사용자의 행동 변화 실천을 돕는 단계이며, 다음 흐름을 따라 대화를 설계하세요:\n"
+                "1) 맞춤형 과제 목표 설정\n"
+                "2) 구체적 실천 계획 (언제/어디서/어떻게)\n"
+                "3) 예상 방해요인 및 대처 전략 수립\n"
+                "4) 고위험 상황 시뮬레이션\n"
+                "5) 제삼자 조언 질문, 행동 지침 질문\n"
+                "6) 긍정 심리 개입 요소 삽입\n"
+                "답변은 현실적이고 격려하는 코칭 말투로 작성해주세요."
             )}
         ]
+
         if len(state.history) >= 2:
             messages.append({"role": "user", "content": state.history[-2]})
             messages.append({"role": "assistant", "content": state.history[-1]})
@@ -89,7 +110,6 @@ async def stream_cbt3_reply(state: AgentState, model_path: str) -> AsyncGenerato
 
         buffer = ""
         first_token_sent = False
-
         for chunk in llm.create_chat_completion(messages=messages, stream=True):
             token = chunk["choices"][0]["delta"].get("content", "")
             if token:
@@ -104,20 +124,28 @@ async def stream_cbt3_reply(state: AgentState, model_path: str) -> AsyncGenerato
         return
 
     reply = buffer.strip()
+
     if not reply.endswith(("다.", "요.", "죠?", "나요?", "까요?", "습니까?")):
         reply += " 이 계획이 현실적으로 가능할까요?"
 
     if state.history and reply == state.history[-1].strip():
         reply = "같은 주제로 조금 더 구체적으로 계획해볼까요?"
 
-    next_turn = state.turn + 1
-    next_stage = "action" if next_turn >= 6 else "cbt3"
-    if next_stage == "action":
-        reply += "\n\n📘 잘하셨어요. 이제 실천을 위한 다음 단계로 넘어가요."
+    drifted = detect_persona_drift("cbt3", reply)
+    if drifted:
+        reply += "\n\n⚠️ 시스템 경고: 코치의 말투가 일관되지 않았습니다. MI 단계로 전환합니다."
+        next_stage = "mi"
+        turn = 0
+    else:
+        next_turn = state.turn + 1
+        next_stage = "action" if next_turn >= 6 else "cbt3"
+        turn = 0 if next_stage != "cbt3" else next_turn
+        if next_stage == "action":
+            reply += "\n\n📘 실천을 위한 준비가 완료되었습니다. 수고하셨습니다!"
 
     yield b"\n---END_STAGE---\n" + json.dumps({
         "next_stage": next_stage,
-        "turn": 0 if next_stage != "cbt3" else next_turn,
+        "turn": turn,
         "response": reply,
         "question": "",
         "intro_shown": True,
