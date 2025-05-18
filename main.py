@@ -1,24 +1,19 @@
-from fastapi import FastAPI, Request, Response
-from fastapi.responses import StreamingResponse, JSONResponse
+from fastapi import FastAPI, Request
+from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Literal, List, Optional
-import json, os, asyncio, nltk
+import os, asyncio, json, traceback
+from huggingface_hub import hf_hub_download
 
-# ✅ 드리프트 감지
 from utils.drift_detector import detect_persona_drift
-from utils.logger import logger
-
-# ✅ 에이전트 스트림 응답 함수
 from agents import (
     stream_empathy_reply, stream_mi_reply,
     stream_cbt1_reply, stream_cbt2_reply, stream_cbt3_reply
 )
 
-# ✅ 모델 경로
-MODEL_PATHS = {}
+print("🌀 main.py 실행됨 - FastAPI 앱 초기화", flush=True)
 
-# ✅ FastAPI 인스턴스
 app = FastAPI()
 
 app.add_middleware(
@@ -26,22 +21,60 @@ app.add_middleware(
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"],
+    allow_headers=["*"]
 )
 
-# ✅ NLTK 자원 및 더미 루프
+MODEL_CONFIG = {
+    "empathy": ("youngbongbong/empathymodel", "merged-empathy-8.0B-chat-Q4_K_M.gguf"),
+    "mi": ("youngbongbong/mimodel", "merged-mi-chat-q4_k_m.gguf"),
+    "cbt1": ("youngbongbong/cbt1model", "merged-first-8.0B-chat-Q4_K_M.gguf"),
+    "cbt2": ("youngbongbong/cbt2model", "merged-mid-8.0B-chat-Q4_K_M.gguf"),
+    "cbt3": ("youngbongbong/cbt3model", "merged-cbt3-8.0B-chat-Q4_K_M.gguf"),
+}
+MODEL_PATHS = {}
+
 @app.on_event("startup")
 async def startup_event():
-    for resource in ["punkt", "averaged_perceptron_tagger", "vader_lexicon"]:
-        try: nltk.data.find(resource)
-        except LookupError: nltk.download(resource)
+    print("🚀 [STARTUP] 앱 시작됨 - 모델 다운로드 시작", flush=True)
+    await download_all_models()
     asyncio.create_task(dummy_loop())
+
+async def download_all_models():
+    token = os.getenv("HUGGINGFACE_TOKEN")
+    for stage, (repo, filename) in MODEL_CONFIG.items():
+        try:
+            print(f"📦 [{stage}] 모델 다운로드 시작...", flush=True)
+            model_path = hf_hub_download(
+                repo_id=repo,
+                filename=filename,
+                token=token,
+                cache_dir="/root/.cache/huggingface",
+                force_download=False
+            )
+            MODEL_PATHS[stage] = model_path
+            print(f"✅ [{stage}] 다운로드 완료 → {model_path}", flush=True)
+        except Exception as e:
+            print(f"❌ [{stage}] 다운로드 실패", flush=True)
+            traceback.print_exc()
 
 async def dummy_loop():
     while True:
         await asyncio.sleep(3600)
 
-# ✅ 사용자 상태 모델
+@app.get("/")
+async def root():
+    return {"status": "ready" if all(MODEL_PATHS.values()) else "initializing"}
+
+@app.get("/status")
+async def status():
+    return {
+        "ready": all(MODEL_PATHS.values()),
+        "models": {
+            stage: os.path.exists(path) if path else False
+            for stage, path in MODEL_PATHS.items()
+        }
+    }
+
 class AgentState(BaseModel):
     session_id: str
     stage: Literal["empathy", "mi", "cbt1", "cbt2", "cbt3"]
@@ -55,53 +88,53 @@ class AgentState(BaseModel):
     awaiting_preparation_decision: Optional[bool] = False
     retry_count: int = 0
 
-# ✅ 스트리밍 엔드포인트
 @app.post("/chat/stream")
 async def chat_stream(request: Request):
     data = await request.json()
     state = AgentState(**data.get("state", {}))
     reply_chunks = []
 
-    async def collect(agent_func, model_key):
-        nonlocal reply_chunks
-        async for chunk in agent_func(state, MODEL_PATHS[model_key]):
-            decoded = chunk.decode("utf-8") if isinstance(chunk, bytes) else chunk
-            reply_chunks.append(decoded)
-            yield chunk
+    async def event_stream():
+        model_path = MODEL_PATHS.get(state.stage)
+        if not model_path or not os.path.exists(model_path):
+            yield f"⚠️ 모델 파일 누락: {state.stage}\n".encode("utf-8")
+            return
 
-    if not MODEL_PATHS:
-        yield "⚠️ 모델이 준비되지 않았습니다.\n".encode("utf-8")
-        return
+        agent_func = {
+            "empathy": stream_empathy_reply,
+            "mi": stream_mi_reply,
+            "cbt1": stream_cbt1_reply,
+            "cbt2": stream_cbt2_reply,
+            "cbt3": stream_cbt3_reply,
+        }.get(state.stage)
 
-    agent_map = {
-        "empathy": stream_empathy_reply,
-        "mi": stream_mi_reply,
-        "cbt1": stream_cbt1_reply,
-        "cbt2": stream_cbt2_reply,
-        "cbt3": stream_cbt3_reply,
-    }
+        if not agent_func:
+            yield f"⚠️ 지원되지 않는 단계: {state.stage}\n".encode("utf-8")
+            return
 
-    agent_func = agent_map.get(state.stage)
-    if not agent_func:
-        yield f"⚠️ {state.stage} 단계는 지원되지 않습니다.\n".encode("utf-8")
-        return
+        try:
+            async for chunk in agent_func(state, model_path):
+                reply_chunks.append(chunk.decode("utf-8") if isinstance(chunk, bytes) else chunk)
+                yield chunk
+        except Exception as e:
+            yield f"⚠️ 오류 발생: {e}\n".encode("utf-8")
+            return
 
-    async for chunk in collect(agent_func, state.stage):
-        yield chunk
+        full_reply = "".join(reply_chunks).strip()
 
-    full_reply = "".join(reply_chunks).strip()
+        try:
+            if detect_persona_drift(state.stage, full_reply):
+                yield "\n[시스템] 페르소나 드리프트 감지됨. MI 단계로 이동합니다.\n".encode("utf-8")
+                state.stage = "mi"
+                state.turn = 0
+        except Exception as e:
+            print(f"[드리프트 예외 무시] {e}", flush=True)
 
-    # ✅ 드리프트 감지
-    if detect_persona_drift(state.stage, full_reply):
-        logger.warning(f"[DRIFT] {state.stage} → MI 단계로 전환됨")
-        yield "\n[시스템] 페르소나 드리프트 감지됨 → MI 단계로 전환합니다.\n".encode("utf-8")
-        state.stage = "mi"
-        state.turn = 0
+        yield b"\n---END_STAGE---\n" + json.dumps({
+            "next_stage": state.stage,
+            "turn": state.turn + 1,
+            "response": full_reply,
+            "history": state.history + [state.question, full_reply]
+        }, ensure_ascii=False).encode("utf-8")
 
-    # ✅ 상태 반환
-    yield b"\n---END_STAGE---\n" + json.dumps({
-        "next_stage": state.stage,
-        "turn": state.turn + 1,
-        "response": full_reply,
-        "history": state.history + [state.question, full_reply]
-    }, ensure_ascii=False).encode("utf-8")
+    return StreamingResponse(event_stream(), media_type="text/plain")

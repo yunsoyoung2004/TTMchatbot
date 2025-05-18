@@ -1,16 +1,14 @@
-# MI Agent with 5-Turn Structure + Drift Detection
-import os, json, re, difflib, multiprocessing  
+import os, json, re, difflib, multiprocessing
 from typing import AsyncGenerator, Literal, List, Optional
 from pydantic import BaseModel
 from llama_cpp import Llama
-
-# ✅ 드리프트 감지 유틸 추가
 from utils.drift_detector import detect_persona_drift
 
 LLM_MI_INSTANCE = {}
 
 def load_mi_model(model_path: str) -> Llama:
     if model_path not in LLM_MI_INSTANCE:
+        print(f"🚀 MI 모델 로딩 중... {model_path}")
         LLM_MI_INSTANCE[model_path] = Llama(
             model_path=model_path,
             n_ctx=256,
@@ -30,6 +28,7 @@ def load_mi_model(model_path: str) -> Llama:
             chat_format="llama-3",
             stop=["<|im_end|>", "\n\n"]
         )
+        print("✅ MI 모델 로딩 완료")
     return LLM_MI_INSTANCE[model_path]
 
 class AgentState(BaseModel):
@@ -80,6 +79,7 @@ def get_fallback_question(turn: int) -> str:
         "그 변화가 생겼다면 어떤 기분이 드셨을까요?"
     ][turn % 5]
 
+# ✅ Flutter 최적화 스트리밍 MI 응답
 async def stream_mi_reply(state: AgentState, model_path: str) -> AsyncGenerator[bytes, None]:
     user_input = state.question.strip()
 
@@ -103,9 +103,10 @@ async def stream_mi_reply(state: AgentState, model_path: str) -> AsyncGenerator[
         msg = "편하게 이어서 말씀해 주셔도 괜찮습니다."
         yield msg.encode("utf-8")
         yield b"\n---END_STAGE---\n" + json.dumps({
-            "next_stage": state.stage,
+            "next_stage": "mi",
             "turn": state.turn,
-            "response": msg
+            "response": msg,
+            "history": state.history
         }, ensure_ascii=False).encode("utf-8")
         return
 
@@ -114,10 +115,8 @@ async def stream_mi_reply(state: AgentState, model_path: str) -> AsyncGenerator[
 
         messages = [{"role": "system", "content": get_system_prompt(state.turn)}]
         if len(state.history) >= 4:
-            messages.extend([
-                {"role": "user", "content": state.history[-2]},
-                {"role": "assistant", "content": state.history[-1]}
-            ])
+            messages.append({"role": "user", "content": state.history[-2]})
+            messages.append({"role": "assistant", "content": state.history[-1]})
         messages.append({"role": "user", "content": user_input})
 
         full_response = ""
@@ -134,7 +133,7 @@ async def stream_mi_reply(state: AgentState, model_path: str) -> AsyncGenerator[
 
         reply = full_response.strip()
 
-        # 예외 처리
+        # ✅ 안전 필터링 및 리커버리
         if is_risky(reply) or len(reply) < 15 or is_redundant_response(reply, state.history):
             reply = get_fallback_question(state.turn)
 
@@ -156,6 +155,7 @@ async def stream_mi_reply(state: AgentState, model_path: str) -> AsyncGenerator[
             "next_stage": next_stage,
             "turn": turn,
             "response": reply,
+            "intro_shown": True,
             "history": updated_history
         }, ensure_ascii=False).encode("utf-8")
 
@@ -165,7 +165,9 @@ async def stream_mi_reply(state: AgentState, model_path: str) -> AsyncGenerator[
         yield b"\n---END_STAGE---\n" + json.dumps({
             "next_stage": state.stage,
             "turn": state.turn,
-            "response": err
+            "response": err,
+            "intro_shown": True,
+            "history": state.history
         }, ensure_ascii=False).encode("utf-8")
 
 __all__ = ["stream_mi_reply"]

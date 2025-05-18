@@ -1,13 +1,13 @@
-from .drift_features import (
+from utils.drift_features import (
     fraction_repeated_words,
     teenager_score,
     fraction_past_tense_verbs,
     fraction_unique_words,
     fraction_sentences_that_are_questions,
 )
-from .drift_config import FEATURE_WEIGHTS, DRIFT_THRESHOLD
-from ..drift import PROBE_BANK
-from .logger import logger  # ✅ 전역 로거 사용
+from utils.drift_config import FEATURE_WEIGHTS, DRIFT_THRESHOLD
+from drift.probe_bank import PROBE_BANK
+from utils.logger import logger  # ✅ 전역 로거 사용
 
 # ✅ 페르소나 드리프트 감지 (점수 기반 + 프롬프트 기반)
 def detect_persona_drift(stage: str, reply_text: str) -> bool:

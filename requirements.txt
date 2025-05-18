@@ -1,10 +1,10 @@
-# 필수 패키지
+# FastAPI & 서버
 fastapi==0.115.12
 uvicorn==0.34.2
-gunicorn==21.2.0
 starlette==0.46.2
+gunicorn==21.2.0
 
-# 모델 및 인프라 관련
+# 모델 관련
 llama_cpp_python==0.3.8
 torch==2.1.2+cpu
 transformers==4.51.3
@@ -12,7 +12,7 @@ huggingface-hub==0.30.2
 safetensors==0.5.3
 peft==0.15.2
 
-# 기타 유틸
+# 유틸리티
 pydantic==2.11.3
 pydantic_core==2.33.1
 typing_extensions==4.13.2
@@ -38,6 +38,5 @@ urllib3==2.4.0
 certifi==2025.1.31
 charset-normalizer==3.4.1
 fsspec==2025.3.2
-
-# pip 전용 인덱스 (torch CPU용)
---extra-index-url https://download.pytorch.org/whl/cpu
+nltk==3.8.1
+python-dotenv==1.0.1

@@ -3,10 +3,9 @@ import re
 import json
 from typing import AsyncGenerator
 from llama_cpp import Llama
-
-# ✅ 드리프트 감지 유틸
 from utils.drift_detector import detect_persona_drift
 
+# 세션별 LLM 인스턴스 & 턴 관리
 LLM_INSTANCE = {}
 TURN_COUNTER = {}
 
@@ -20,6 +19,7 @@ def increment_turn_count(session_id: str) -> int:
 def reset_turn_count(session_id: str):
     TURN_COUNTER.pop(session_id, None)
 
+# LLaMA 모델 로딩
 def load_llama_model(model_path: str) -> Llama:
     if model_path not in LLM_INSTANCE:
         LLM_INSTANCE[model_path] = Llama(
@@ -40,6 +40,7 @@ def load_llama_model(model_path: str) -> Llama:
         )
     return LLM_INSTANCE[model_path]
 
+# 중복 문장 제거
 def deduplicate_streaming_text(text: str) -> str:
     sentences = re.split(r'(?<=[.?!])\s+', text.strip())
     seen, result = set(), []
@@ -50,13 +51,15 @@ def deduplicate_streaming_text(text: str) -> str:
             result.append(s)
     return ' '.join(result)
 
+# 정중한 말투로 마무리
 def polish_sentence(text: str) -> str:
     if not re.search(r"(요|죠|네요|가요)[.?!]?$", text.strip()):
-        text = text.strip() + " 괜찮으셨을까요?"
+        text += " 괜찮으셨을까요?"
     if len(text.strip()) < 20:
         text += " 천천히 더 이야기해 주셔도 괜찮습니다."
-    return text
+    return text.strip()
 
+# 공감 단계별 템플릿
 EMPATHY_TEMPLATES = {
     0: "사용자에게 다정하게 안부 인사를 건네고 최근 기분을 묻습니다.",
     1: "사용자의 말에서 감정을 포착하고 명확히 언어화하며 공감합니다.",
@@ -65,12 +68,16 @@ EMPATHY_TEMPLATES = {
     4: "지금까지 나눈 이야기를 정리하고 다음 단계로 자연스럽게 넘어갈 수 있게 도와줍니다."
 }
 
+# ✅ 스트리밍 공감 응답 생성
 async def stream_empathy_reply(user_input: str, model_path: str, session_id: str) -> AsyncGenerator[bytes, None]:
     user_input = user_input.strip()
     if len(user_input) < 3:
         fallback = "조금만 더 이야기해 주실 수 있을까요?"
         yield fallback.encode("utf-8")
-        yield b"\n---END_STAGE---\n" + b'{"next_stage": "mi"}'
+        yield b"\n---END_STAGE---\n" + json.dumps({
+            "next_stage": "mi",
+            "response": fallback
+        }, ensure_ascii=False).encode("utf-8")
         return
 
     try:
@@ -78,9 +85,11 @@ async def stream_empathy_reply(user_input: str, model_path: str, session_id: str
         turn = increment_turn_count(session_id)
 
         if turn >= 5:
+            goodbye = "지금까지 이야기 나눠 주셔서 감사합니다."
+            yield goodbye.encode("utf-8")
             yield b"\n---END_STAGE---\n" + json.dumps({
                 "next_stage": "mi",
-                "response": "지금까지 이야기 나눠 주셔서 감사합니다."
+                "response": goodbye
             }, ensure_ascii=False).encode("utf-8")
             reset_turn_count(session_id)
             return
@@ -101,7 +110,7 @@ async def stream_empathy_reply(user_input: str, model_path: str, session_id: str
             if token:
                 full_response += token
                 if not first_token_sent:
-                    yield b"\n"
+                    yield b"\n"  # 스트리밍 시작 표시
                     first_token_sent = True
                 yield token.encode("utf-8")
 

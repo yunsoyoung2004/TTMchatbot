@@ -1,3 +1,4 @@
+# ✅ Python 및 개발 캐시
 __pycache__/
 *.pyc
 *.pyo
@@ -6,17 +7,30 @@ __pycache__/
 *.db
 *.log
 *.sqlite3
+*.ipynb
+.DS_Store
 
+# ✅ IDE 설정 무시
+.vscode/
+.ipynb_checkpoints/
+
+# ✅ Git 무시
 .git/
 .gitignore
-.ipynb_checkpoints/
-.vscode/
-.env
+
+# ✅ 가상환경 무시
 .venv/
-.env/
+venv/
+.env
+
+# ✅ 사전 다운로드 모델 사용 시, huggingface 캐시는 반드시 포함해야 하므로 다음은 주석 처리 또는 제거!
+# .cache/
+# .cache/huggingface/
+# models/
+# *.gguf
+# *.safetensors
+
 *.gguf
-*.ckpt
-*.safetensors
-models/
+*.bin
+*.pt
 huggingface/
-.cache/
