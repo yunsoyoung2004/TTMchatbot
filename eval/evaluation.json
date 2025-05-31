@@ -1,0 +1,2502 @@
+[
+  {
+    "text": "도대체 이건 뭔데 헉",
+    "should_transition": true,
+    "previous_text": ""
+  },
+  {
+    "text": "됐다고 했잖아 진지하게진지하게",
+    "should_transition": true,
+    "previous_text": "도대체 이건 뭔데 헉"
+  },
+  {
+    "text": "마음을 열어보려 노력하고 있어요 그런 마음이 생겼어요.",
+    "should_transition": false,
+    "previous_text": "됐다고 했잖아 진지하게진지하게"
+  },
+  {
+    "text": "내 감정을 알아가는 중이에요 그런 마음이 자꾸 들어요.",
+    "should_transition": false,
+    "previous_text": "마음을 열어보려 노력하고 있어요 그런 마음이 생겼어요."
+  },
+  {
+    "text": "혼자 있고 싶어 하지마하지마",
+    "should_transition": true,
+    "previous_text": "내 감정을 알아가는 중이에요 그런 마음이 자꾸 들어요."
+  },
+  {
+    "text": "예전에는 도망쳤던 기억이 있어요 그랬던 시절이 있었죠.",
+    "should_transition": false,
+    "previous_text": "혼자 있고 싶어 하지마하지마"
+  },
+  {
+    "text": "내가 나를 돌보는 느낌이에요 드러낼 수 있어서 다행이에요.",
+    "should_transition": false,
+    "previous_text": "예전에는 도망쳤던 기억이 있어요 그랬던 시절이 있었죠."
+  },
+  {
+    "text": "전에는 이런 얘길 꺼내기 어려웠어요 그런 마음이 생겼어요.",
+    "should_transition": false,
+    "previous_text": "내가 나를 돌보는 느낌이에요 드러낼 수 있어서 다행이에요."
+  },
+  {
+    "text": "계속하기 버거워 악악악",
+    "should_transition": true,
+    "previous_text": "전에는 이런 얘길 꺼내기 어려웠어요 그런 마음이 생겼어요."
+  },
+  {
+    "text": "감정의 실마리가 잡혀요",
+    "should_transition": false,
+    "previous_text": "계속하기 버거워 악악악"
+  },
+  {
+    "text": "말하고 나니 마음이 놓여요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "감정의 실마리가 잡혀요"
+  },
+  {
+    "text": "감정의 실마리가 잡혀요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "말하고 나니 마음이 놓여요 그런 느낌이에요."
+  },
+  {
+    "text": "에휴 다 싫어 뭐래",
+    "should_transition": true,
+    "previous_text": "감정의 실마리가 잡혀요 그런 느낌이에요."
+  },
+  {
+    "text": "희망이라는 단어가 떠올라요 솔직히 털어놓을 수 있어서 감사해요.",
+    "should_transition": false,
+    "previous_text": "에휴 다 싫어 뭐래"
+  },
+  {
+    "text": "말하고 나니 마음이 놓여요.",
+    "should_transition": false,
+    "previous_text": "희망이라는 단어가 떠올라요 솔직히 털어놓을 수 있어서 감사해요."
+  },
+  {
+    "text": "속이 조금 시원해졌어요 그런 일이 있었던 것 같아요.",
+    "should_transition": false,
+    "previous_text": "말하고 나니 마음이 놓여요."
+  },
+  {
+    "text": "도저히 납득 안 돼 아ㅠㅠ",
+    "should_transition": true,
+    "previous_text": "속이 조금 시원해졌어요 그런 일이 있었던 것 같아요."
+  },
+  {
+    "text": "그만 좀 해 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "도저히 납득 안 돼 아ㅠㅠ"
+  },
+  {
+    "text": "하고 싶지 않아 아ㅠㅠ",
+    "should_transition": true,
+    "previous_text": "그만 좀 해 ㅠㅠㅠ"
+  },
+  {
+    "text": "더는 듣기 싫어",
+    "should_transition": true,
+    "previous_text": "하고 싶지 않아 아ㅠㅠ"
+  },
+  {
+    "text": "감정을 이해받는 것만으로 위로가 돼요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "더는 듣기 싫어"
+  },
+  {
+    "text": "조금씩 내 마음을 인정해보려고요 그런 마음이 생겼어요.",
+    "should_transition": false,
+    "previous_text": "감정을 이해받는 것만으로 위로가 돼요 그런 느낌이에요."
+  },
+  {
+    "text": "진짜 의미 없어 이런이런",
+    "should_transition": true,
+    "previous_text": "조금씩 내 마음을 인정해보려고요 그런 마음이 생겼어요."
+  },
+  {
+    "text": "말 같지도 않아 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "진짜 의미 없어 이런이런"
+  },
+  {
+    "text": "그만 좀 해 아아아",
+    "should_transition": true,
+    "previous_text": "말 같지도 않아 ㅋㅋㅋ"
+  },
+  {
+    "text": "몰라 진짜 짜증나",
+    "should_transition": true,
+    "previous_text": "그만 좀 해 아아아"
+  },
+  {
+    "text": "말 같지도 않아 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "몰라 진짜 짜증나"
+  },
+  {
+    "text": "하... 모르겠다 헉",
+    "should_transition": true,
+    "previous_text": "말 같지도 않아 ㅠㅠㅠ"
+  },
+  {
+    "text": "상황을 다시 생각해보니 새로운 시각이 생겼어요",
+    "should_transition": false,
+    "previous_text": "하... 모르겠다 헉"
+  },
+  {
+    "text": "듣기 싫어 하하하",
+    "should_transition": true,
+    "previous_text": "상황을 다시 생각해보니 새로운 시각이 생겼어요"
+  },
+  {
+    "text": "생각이 바뀌기 시작했어요",
+    "should_transition": false,
+    "previous_text": "듣기 싫어 하하하"
+  },
+  {
+    "text": "희망이라는 단어가 떠올라요",
+    "should_transition": false,
+    "previous_text": "생각이 바뀌기 시작했어요"
+  },
+  {
+    "text": "말하다 보니 감정이 정리되는 것 같아요 요 며칠 그런 감정이 올라왔어요.",
+    "should_transition": false,
+    "previous_text": "희망이라는 단어가 떠올라요"
+  },
+  {
+    "text": "말하다 보니 감정이 정리되는 것 같아요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "말하다 보니 감정이 정리되는 것 같아요 요 며칠 그런 감정이 올라왔어요."
+  },
+  {
+    "text": "그때는 이런 표현이 힘들었어요.",
+    "should_transition": false,
+    "previous_text": "말하다 보니 감정이 정리되는 것 같아요 그런 느낌이에요."
+  },
+  {
+    "text": "진짜 의미 없어 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "그때는 이런 표현이 힘들었어요."
+  },
+  {
+    "text": "스스로를 돌아보게 되었어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "진짜 의미 없어 ㅠㅠㅠ"
+  },
+  {
+    "text": "스스로를 돌아보게 되었어요.",
+    "should_transition": false,
+    "previous_text": "스스로를 돌아보게 되었어요 그런 느낌이에요."
+  },
+  {
+    "text": "에휴 다 싫어 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "스스로를 돌아보게 되었어요."
+  },
+  {
+    "text": "에휴 다 싫어 뭐래",
+    "should_transition": true,
+    "previous_text": "에휴 다 싫어 ㅋㅋㅋ"
+  },
+  {
+    "text": "생각이 바뀌기 시작했어요 표현하고 나니 한결 가벼워요.",
+    "should_transition": false,
+    "previous_text": "에휴 다 싫어 뭐래"
+  },
+  {
+    "text": "닥쳐 악악악",
+    "should_transition": true,
+    "previous_text": "생각이 바뀌기 시작했어요 표현하고 나니 한결 가벼워요."
+  },
+  {
+    "text": "예전에는 도망쳤던 기억이 있어요 말로 꺼낼 수 있어서 후련해요.",
+    "should_transition": false,
+    "previous_text": "닥쳐 악악악"
+  },
+  {
+    "text": "어떻게 된 거야 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "예전에는 도망쳤던 기억이 있어요 말로 꺼낼 수 있어서 후련해요."
+  },
+  {
+    "text": "생각이 바뀌기 시작했어요 이야기할 수 있어서 마음이 편해요.",
+    "should_transition": false,
+    "previous_text": "어떻게 된 거야 ㅋㅋㅋ"
+  },
+  {
+    "text": "귀찮아 못 하겠어 절대안돼",
+    "should_transition": true,
+    "previous_text": "생각이 바뀌기 시작했어요 이야기할 수 있어서 마음이 편해요."
+  },
+  {
+    "text": "그냥 꺼져 아아아",
+    "should_transition": true,
+    "previous_text": "귀찮아 못 하겠어 절대안돼"
+  },
+  {
+    "text": "에휴 다 싫어",
+    "should_transition": true,
+    "previous_text": "그냥 꺼져 아아아"
+  },
+  {
+    "text": "진짜 의미 없어 진심진심",
+    "should_transition": true,
+    "previous_text": "에휴 다 싫어"
+  },
+  {
+    "text": "내 감정을 솔직하게 표현해보니 좋았어요",
+    "should_transition": false,
+    "previous_text": "진짜 의미 없어 진심진심"
+  },
+  {
+    "text": "그냥 꺼져 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "내 감정을 솔직하게 표현해보니 좋았어요"
+  },
+  {
+    "text": "조금씩 내 마음을 인정해보려고요 최근에 그런 느낌이 자주 들어요.",
+    "should_transition": false,
+    "previous_text": "그냥 꺼져 ㅠㅠㅠ"
+  },
+  {
+    "text": "감정을 이해받는 것만으로 위로가 돼요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "조금씩 내 마음을 인정해보려고요 최근에 그런 느낌이 자주 들어요."
+  },
+  {
+    "text": "귀찮아 못 하겠어 진짜로진짜로",
+    "should_transition": true,
+    "previous_text": "감정을 이해받는 것만으로 위로가 돼요 그런 느낌이에요."
+  },
+  {
+    "text": "생각이 바뀌기 시작했어요 그런 기억이 나는 것 같아요.",
+    "should_transition": false,
+    "previous_text": "귀찮아 못 하겠어 진짜로진짜로"
+  },
+  {
+    "text": "말시키지 마 그건싫어",
+    "should_transition": true,
+    "previous_text": "생각이 바뀌기 시작했어요 그런 기억이 나는 것 같아요."
+  },
+  {
+    "text": "조금씩 내 마음을 인정해보려고요.",
+    "should_transition": false,
+    "previous_text": "말시키지 마 그건싫어"
+  },
+  {
+    "text": "이야기하니 숨통이 트여요 가끔 그런 생각이 맴돌아요.",
+    "should_transition": false,
+    "previous_text": "조금씩 내 마음을 인정해보려고요."
+  },
+  {
+    "text": "닥쳐 절대안돼",
+    "should_transition": true,
+    "previous_text": "이야기하니 숨통이 트여요 가끔 그런 생각이 맴돌아요."
+  },
+  {
+    "text": "도대체 이건 뭔데 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "닥쳐 절대안돼"
+  },
+  {
+    "text": "닥쳐 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "도대체 이건 뭔데 ㅋㅋㅋ"
+  },
+  {
+    "text": "몰라 진짜 짜증나",
+    "should_transition": true,
+    "previous_text": "닥쳐 ㅠㅠㅠ"
+  },
+  {
+    "text": "하... 모르겠다 아아아",
+    "should_transition": true,
+    "previous_text": "몰라 진짜 짜증나"
+  },
+  {
+    "text": "하... 모르겠다 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "하... 모르겠다 아아아"
+  },
+  {
+    "text": "그냥 꺼져 뭐래",
+    "should_transition": true,
+    "previous_text": "하... 모르겠다 ㅠㅠㅠ"
+  },
+  {
+    "text": "말시키지 마 하지마하지마",
+    "should_transition": true,
+    "previous_text": "그냥 꺼져 뭐래"
+  },
+  {
+    "text": "하... 모르겠다 아아아",
+    "should_transition": true,
+    "previous_text": "말시키지 마 하지마하지마"
+  },
+  {
+    "text": "이런 말은 한 번도 해본 적 없어요 드러낼 수 있어서 다행이에요.",
+    "should_transition": false,
+    "previous_text": "하... 모르겠다 아아아"
+  },
+  {
+    "text": "헛소리 하지 마 악악악",
+    "should_transition": true,
+    "previous_text": "이런 말은 한 번도 해본 적 없어요 드러낼 수 있어서 다행이에요."
+  },
+  {
+    "text": "으아아아악 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "헛소리 하지 마 악악악"
+  },
+  {
+    "text": "감정을 표현할 수 있어서 다행이에요 그런 일이 있었던 것 같아요.",
+    "should_transition": false,
+    "previous_text": "으아아아악 ㅋㅋㅋ"
+  },
+  {
+    "text": "말하다 보니 감정이 정리되는 것 같아요",
+    "should_transition": false,
+    "previous_text": "감정을 표현할 수 있어서 다행이에요 그런 일이 있었던 것 같아요."
+  },
+  {
+    "text": "상담을 통해 나를 이해하게 되었어요.",
+    "should_transition": false,
+    "previous_text": "말하다 보니 감정이 정리되는 것 같아요"
+  },
+  {
+    "text": "이야기하면서 마음이 편해졌어요.",
+    "should_transition": false,
+    "previous_text": "상담을 통해 나를 이해하게 되었어요."
+  },
+  {
+    "text": "감정의 실마리가 잡혀요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "이야기하면서 마음이 편해졌어요."
+  },
+  {
+    "text": "작은 변화의 조짐이 보여요.",
+    "should_transition": false,
+    "previous_text": "감정의 실마리가 잡혀요 그런 느낌이에요."
+  },
+  {
+    "text": "됐다고 했잖아 진지하게진지하게",
+    "should_transition": true,
+    "previous_text": "작은 변화의 조짐이 보여요."
+  },
+  {
+    "text": "됐다고 했잖아 아아아",
+    "should_transition": true,
+    "previous_text": "됐다고 했잖아 진지하게진지하게"
+  },
+  {
+    "text": "조금씩 내 마음을 인정해보려고요 그런 마음이 자꾸 들어요.",
+    "should_transition": false,
+    "previous_text": "됐다고 했잖아 아아아"
+  },
+  {
+    "text": "아 몰라 진짜 헉",
+    "should_transition": true,
+    "previous_text": "조금씩 내 마음을 인정해보려고요 그런 마음이 자꾸 들어요."
+  },
+  {
+    "text": "그건 진짜 말이 안 돼 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "아 몰라 진짜 헉"
+  },
+  {
+    "text": "용기 내서 말해봤어요 그랬던 시절이 있었죠.",
+    "should_transition": false,
+    "previous_text": "그건 진짜 말이 안 돼 ㅋㅋㅋ"
+  },
+  {
+    "text": "용기 내서 말해봤어요 그런 일이 있었던 것 같아요.",
+    "should_transition": false,
+    "previous_text": "용기 내서 말해봤어요 그랬던 시절이 있었죠."
+  },
+  {
+    "text": "됐다고 했잖아",
+    "should_transition": true,
+    "previous_text": "용기 내서 말해봤어요 그런 일이 있었던 것 같아요."
+  },
+  {
+    "text": "말하다 보니 감정이 정리되는 것 같아요",
+    "should_transition": false,
+    "previous_text": "됐다고 했잖아"
+  },
+  {
+    "text": "됐다고 했잖아 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "말하다 보니 감정이 정리되는 것 같아요"
+  },
+  {
+    "text": "전에는 이런 얘길 꺼내기 어려웠어요.",
+    "should_transition": false,
+    "previous_text": "됐다고 했잖아 ㅠㅠㅠ"
+  },
+  {
+    "text": "으아아아악 아아아",
+    "should_transition": true,
+    "previous_text": "전에는 이런 얘길 꺼내기 어려웠어요."
+  },
+  {
+    "text": "진짜 의미 없어 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "으아아아악 아아아"
+  },
+  {
+    "text": "도저히 납득 안 돼 뭐래",
+    "should_transition": true,
+    "previous_text": "진짜 의미 없어 ㅠㅠㅠ"
+  },
+  {
+    "text": "참견하지 마 아ㅠㅠ",
+    "should_transition": true,
+    "previous_text": "도저히 납득 안 돼 뭐래"
+  },
+  {
+    "text": "상황을 다시 생각해보니 새로운 시각이 생겼어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "참견하지 마 아ㅠㅠ"
+  },
+  {
+    "text": "하... 모르겠다 아아아",
+    "should_transition": true,
+    "previous_text": "상황을 다시 생각해보니 새로운 시각이 생겼어요 그런 느낌이에요."
+  },
+  {
+    "text": "이런 말은 한 번도 해본 적 없어요 그랬던 시절이 있었죠.",
+    "should_transition": false,
+    "previous_text": "하... 모르겠다 아아아"
+  },
+  {
+    "text": "이건 좀 아닌 것 같아 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "이런 말은 한 번도 해본 적 없어요 그랬던 시절이 있었죠."
+  },
+  {
+    "text": "하... 모르겠다 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "이건 좀 아닌 것 같아 ㅋㅋㅋ"
+  },
+  {
+    "text": "내 감정을 솔직하게 표현해보니 좋았어요 이야기할 수 있어서 마음이 편해요.",
+    "should_transition": false,
+    "previous_text": "하... 모르겠다 ㅠㅠㅠ"
+  },
+  {
+    "text": "내 감정을 알아가는 중이에요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "내 감정을 솔직하게 표현해보니 좋았어요 이야기할 수 있어서 마음이 편해요."
+  },
+  {
+    "text": "조금씩 내 마음을 인정해보려고요 아마 그랬던 적이 있어요.",
+    "should_transition": false,
+    "previous_text": "내 감정을 알아가는 중이에요 그런 느낌이에요."
+  },
+  {
+    "text": "듣기 싫어 노노노",
+    "should_transition": true,
+    "previous_text": "조금씩 내 마음을 인정해보려고요 아마 그랬던 적이 있어요."
+  },
+  {
+    "text": "희미하게나마 빛이 보이는 것 같아요",
+    "should_transition": false,
+    "previous_text": "듣기 싫어 노노노"
+  },
+  {
+    "text": "됐다고 했잖아 노노노",
+    "should_transition": true,
+    "previous_text": "희미하게나마 빛이 보이는 것 같아요"
+  },
+  {
+    "text": "더 이상 못 하겠어 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "됐다고 했잖아 노노노"
+  },
+  {
+    "text": "하... 모르겠다 정말정말",
+    "should_transition": true,
+    "previous_text": "더 이상 못 하겠어 ㅋㅋㅋ"
+  },
+  {
+    "text": "이야기하니 숨통이 트여요 그런 일이 있었던 것 같아요.",
+    "should_transition": false,
+    "previous_text": "하... 모르겠다 정말정말"
+  },
+  {
+    "text": "조금씩이라도 변화하고 싶다는 생각이 들어요 그런 기억이 나는 것 같아요.",
+    "should_transition": false,
+    "previous_text": "이야기하니 숨통이 트여요 그런 일이 있었던 것 같아요."
+  },
+  {
+    "text": "꺼져 제발 하하하",
+    "should_transition": true,
+    "previous_text": "조금씩이라도 변화하고 싶다는 생각이 들어요 그런 기억이 나는 것 같아요."
+  },
+  {
+    "text": "몰라 진짜 짜증나 아아아",
+    "should_transition": true,
+    "previous_text": "꺼져 제발 하하하"
+  },
+  {
+    "text": "혼자 끙끙 앓지 않아서 좋아요 그렇게 느껴졌던 순간이 있어요.",
+    "should_transition": false,
+    "previous_text": "몰라 진짜 짜증나 아아아"
+  },
+  {
+    "text": "스스로를 돌아보게 되었어요",
+    "should_transition": false,
+    "previous_text": "혼자 끙끙 앓지 않아서 좋아요 그렇게 느껴졌던 순간이 있어요."
+  },
+  {
+    "text": "희망이라는 단어가 떠올라요",
+    "should_transition": false,
+    "previous_text": "스스로를 돌아보게 되었어요"
+  },
+  {
+    "text": "마음을 열어보려 노력하고 있어요 그런 마음이 생겼어요.",
+    "should_transition": false,
+    "previous_text": "희망이라는 단어가 떠올라요"
+  },
+  {
+    "text": "꺼져 제발 뭐래",
+    "should_transition": true,
+    "previous_text": "마음을 열어보려 노력하고 있어요 그런 마음이 생겼어요."
+  },
+  {
+    "text": "아 몰라 진짜",
+    "should_transition": true,
+    "previous_text": "꺼져 제발 뭐래"
+  },
+  {
+    "text": "혼자 끙끙 앓지 않아서 좋아요 말로 꺼낼 수 있어서 후련해요.",
+    "should_transition": false,
+    "previous_text": "아 몰라 진짜"
+  },
+  {
+    "text": "황당하네 아아아",
+    "should_transition": true,
+    "previous_text": "혼자 끙끙 앓지 않아서 좋아요 말로 꺼낼 수 있어서 후련해요."
+  },
+  {
+    "text": "됐다고 했잖아 정말정말",
+    "should_transition": true,
+    "previous_text": "황당하네 아아아"
+  },
+  {
+    "text": "꺼져 제발 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "됐다고 했잖아 정말정말"
+  },
+  {
+    "text": "이야기하면서 마음이 편해졌어요 그런 기억이 나는 것 같아요.",
+    "should_transition": false,
+    "previous_text": "꺼져 제발 ㅋㅋㅋ"
+  },
+  {
+    "text": "닥쳐 정말정말",
+    "should_transition": true,
+    "previous_text": "이야기하면서 마음이 편해졌어요 그런 기억이 나는 것 같아요."
+  },
+  {
+    "text": "말하다 보니 감정이 정리되는 것 같아요 이야기할 수 있어서 마음이 편해요.",
+    "should_transition": false,
+    "previous_text": "닥쳐 정말정말"
+  },
+  {
+    "text": "상담을 통해 나를 이해하게 되었어요",
+    "should_transition": false,
+    "previous_text": "말하다 보니 감정이 정리되는 것 같아요 이야기할 수 있어서 마음이 편해요."
+  },
+  {
+    "text": "예전에는 도망쳤던 기억이 있어요",
+    "should_transition": false,
+    "previous_text": "상담을 통해 나를 이해하게 되었어요"
+  },
+  {
+    "text": "용기 내서 말해봤어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "예전에는 도망쳤던 기억이 있어요"
+  },
+  {
+    "text": "됐다고 했잖아 뭐래",
+    "should_transition": true,
+    "previous_text": "용기 내서 말해봤어요 그런 느낌이에요."
+  },
+  {
+    "text": "닥쳐 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "됐다고 했잖아 뭐래"
+  },
+  {
+    "text": "조금은 감정을 파악할 수 있을 것 같아요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "닥쳐 ㅋㅋㅋ"
+  },
+  {
+    "text": "헛소리 하지 마 아ㅠㅠ",
+    "should_transition": true,
+    "previous_text": "조금은 감정을 파악할 수 있을 것 같아요 그런 느낌이에요."
+  },
+  {
+    "text": "닥쳐 뭐래",
+    "should_transition": true,
+    "previous_text": "헛소리 하지 마 아ㅠㅠ"
+  },
+  {
+    "text": "짜증나 죽겠어 진지하게진지하게",
+    "should_transition": true,
+    "previous_text": "닥쳐 뭐래"
+  },
+  {
+    "text": "조금씩이라도 변화하고 싶다는 생각이 들어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "짜증나 죽겠어 진지하게진지하게"
+  },
+  {
+    "text": "희미하게나마 빛이 보이는 것 같아요 그랬던 시절이 있었죠.",
+    "should_transition": false,
+    "previous_text": "조금씩이라도 변화하고 싶다는 생각이 들어요 그런 느낌이에요."
+  },
+  {
+    "text": "상황을 다시 생각해보니 새로운 시각이 생겼어요 최근에 그런 느낌이 자주 들어요.",
+    "should_transition": false,
+    "previous_text": "희미하게나마 빛이 보이는 것 같아요 그랬던 시절이 있었죠."
+  },
+  {
+    "text": "예전에는 도망쳤던 기억이 있어요 그렇게 느껴졌던 순간이 있어요.",
+    "should_transition": false,
+    "previous_text": "상황을 다시 생각해보니 새로운 시각이 생겼어요 최근에 그런 느낌이 자주 들어요."
+  },
+  {
+    "text": "내 감정을 솔직하게 표현해보니 좋았어요 아마 그랬던 적이 있어요.",
+    "should_transition": false,
+    "previous_text": "예전에는 도망쳤던 기억이 있어요 그렇게 느껴졌던 순간이 있어요."
+  },
+  {
+    "text": "생각이 바뀌기 시작했어요.",
+    "should_transition": false,
+    "previous_text": "내 감정을 솔직하게 표현해보니 좋았어요 아마 그랬던 적이 있어요."
+  },
+  {
+    "text": "생각이 바뀌기 시작했어요",
+    "should_transition": false,
+    "previous_text": "생각이 바뀌기 시작했어요."
+  },
+  {
+    "text": "정말 하기 싫어 하하하",
+    "should_transition": true,
+    "previous_text": "생각이 바뀌기 시작했어요"
+  },
+  {
+    "text": "감정을 이해받는 것만으로 위로가 돼요 그런 일이 있었던 것 같아요.",
+    "should_transition": false,
+    "previous_text": "정말 하기 싫어 하하하"
+  },
+  {
+    "text": "상담을 통해 나를 이해하게 되었어요.",
+    "should_transition": false,
+    "previous_text": "감정을 이해받는 것만으로 위로가 돼요 그런 일이 있었던 것 같아요."
+  },
+  {
+    "text": "그냥 꺼져 뭐래",
+    "should_transition": true,
+    "previous_text": "상담을 통해 나를 이해하게 되었어요."
+  },
+  {
+    "text": "몰라 진짜 짜증나 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "그냥 꺼져 뭐래"
+  },
+  {
+    "text": "됐다고 했잖아 하하하",
+    "should_transition": true,
+    "previous_text": "몰라 진짜 짜증나 ㅠㅠㅠ"
+  },
+  {
+    "text": "그만하자 진짜로진짜로",
+    "should_transition": true,
+    "previous_text": "됐다고 했잖아 하하하"
+  },
+  {
+    "text": "으아아아악 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "그만하자 진짜로진짜로"
+  },
+  {
+    "text": "짜증나 죽겠어 하하하",
+    "should_transition": true,
+    "previous_text": "으아아아악 ㅠㅠㅠ"
+  },
+  {
+    "text": "말하다 보니 감정이 정리되는 것 같아요 그런 마음이 자꾸 들어요.",
+    "should_transition": false,
+    "previous_text": "짜증나 죽겠어 하하하"
+  },
+  {
+    "text": "이야기하니 숨통이 트여요 드러낼 수 있어서 다행이에요.",
+    "should_transition": false,
+    "previous_text": "말하다 보니 감정이 정리되는 것 같아요 그런 마음이 자꾸 들어요."
+  },
+  {
+    "text": "미세하게나마 나아질 수 있다는 생각이 들어요",
+    "should_transition": false,
+    "previous_text": "이야기하니 숨통이 트여요 드러낼 수 있어서 다행이에요."
+  },
+  {
+    "text": "하... 모르겠다 진지하게진지하게",
+    "should_transition": true,
+    "previous_text": "미세하게나마 나아질 수 있다는 생각이 들어요"
+  },
+  {
+    "text": "에휴 다 싫어 뭐래",
+    "should_transition": true,
+    "previous_text": "하... 모르겠다 진지하게진지하게"
+  },
+  {
+    "text": "전에는 이런 얘길 꺼내기 어려웠어요.",
+    "should_transition": false,
+    "previous_text": "에휴 다 싫어 뭐래"
+  },
+  {
+    "text": "이야기하면서 마음이 편해졌어요.",
+    "should_transition": false,
+    "previous_text": "전에는 이런 얘길 꺼내기 어려웠어요."
+  },
+  {
+    "text": "생각이 바뀌기 시작했어요.",
+    "should_transition": false,
+    "previous_text": "이야기하면서 마음이 편해졌어요."
+  },
+  {
+    "text": "으아아아악 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "생각이 바뀌기 시작했어요."
+  },
+  {
+    "text": "희망이라는 단어가 떠올라요 그런 마음이 생겼어요.",
+    "should_transition": false,
+    "previous_text": "으아아아악 ㅠㅠㅠ"
+  },
+  {
+    "text": "아 몰라 진짜 하하하",
+    "should_transition": true,
+    "previous_text": "희망이라는 단어가 떠올라요 그런 마음이 생겼어요."
+  },
+  {
+    "text": "용기 내서 말해봤어요",
+    "should_transition": false,
+    "previous_text": "아 몰라 진짜 하하하"
+  },
+  {
+    "text": "몰라 진짜 짜증나 아아아",
+    "should_transition": true,
+    "previous_text": "용기 내서 말해봤어요"
+  },
+  {
+    "text": "귀찮아 못 하겠어 아ㅠㅠ",
+    "should_transition": true,
+    "previous_text": "몰라 진짜 짜증나 아아아"
+  },
+  {
+    "text": "그 얘긴 이제 그만해 정말정말",
+    "should_transition": true,
+    "previous_text": "귀찮아 못 하겠어 아ㅠㅠ"
+  },
+  {
+    "text": "상황을 다시 생각해보니 새로운 시각이 생겼어요 가끔 그런 생각이 맴돌아요.",
+    "should_transition": false,
+    "previous_text": "그 얘긴 이제 그만해 정말정말"
+  },
+  {
+    "text": "말 같지도 않아 그건싫어",
+    "should_transition": true,
+    "previous_text": "상황을 다시 생각해보니 새로운 시각이 생겼어요 가끔 그런 생각이 맴돌아요."
+  },
+  {
+    "text": "그땐 솔직해지기 힘들었어요 솔직히 털어놓을 수 있어서 감사해요.",
+    "should_transition": false,
+    "previous_text": "말 같지도 않아 그건싫어"
+  },
+  {
+    "text": "으아아아악 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "그땐 솔직해지기 힘들었어요 솔직히 털어놓을 수 있어서 감사해요."
+  },
+  {
+    "text": "닥쳐 뭐래",
+    "should_transition": true,
+    "previous_text": "으아아아악 ㅋㅋㅋ"
+  },
+  {
+    "text": "상황을 다시 생각해보니 새로운 시각이 생겼어요 드러낼 수 있어서 다행이에요.",
+    "should_transition": false,
+    "previous_text": "닥쳐 뭐래"
+  },
+  {
+    "text": "됐다고 했잖아 아ㅠㅠ",
+    "should_transition": true,
+    "previous_text": "상황을 다시 생각해보니 새로운 시각이 생겼어요 드러낼 수 있어서 다행이에요."
+  },
+  {
+    "text": "예전에는 도망쳤던 기억이 있어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "됐다고 했잖아 아ㅠㅠ"
+  },
+  {
+    "text": "감정을 이해받는 것만으로 위로가 돼요 그렇게 느껴졌던 순간이 있어요.",
+    "should_transition": false,
+    "previous_text": "예전에는 도망쳤던 기억이 있어요 그런 느낌이에요."
+  },
+  {
+    "text": "귀찮아 못 하겠어",
+    "should_transition": true,
+    "previous_text": "감정을 이해받는 것만으로 위로가 돼요 그렇게 느껴졌던 순간이 있어요."
+  },
+  {
+    "text": "짜증나 죽겠어 아ㅠㅠ",
+    "should_transition": true,
+    "previous_text": "귀찮아 못 하겠어"
+  },
+  {
+    "text": "미세하게나마 나아질 수 있다는 생각이 들어요 아마 그랬던 적이 있어요.",
+    "should_transition": false,
+    "previous_text": "짜증나 죽겠어 아ㅠㅠ"
+  },
+  {
+    "text": "상황을 다시 생각해보니 새로운 시각이 생겼어요 그렇게 느껴졌던 순간이 있어요.",
+    "should_transition": false,
+    "previous_text": "미세하게나마 나아질 수 있다는 생각이 들어요 아마 그랬던 적이 있어요."
+  },
+  {
+    "text": "내 감정을 솔직하게 표현해보니 좋았어요 솔직히 털어놓을 수 있어서 감사해요.",
+    "should_transition": false,
+    "previous_text": "상황을 다시 생각해보니 새로운 시각이 생겼어요 그렇게 느껴졌던 순간이 있어요."
+  },
+  {
+    "text": "생각이 바뀌기 시작했어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "내 감정을 솔직하게 표현해보니 좋았어요 솔직히 털어놓을 수 있어서 감사해요."
+  },
+  {
+    "text": "상황을 다시 생각해보니 새로운 시각이 생겼어요.",
+    "should_transition": false,
+    "previous_text": "생각이 바뀌기 시작했어요 그런 느낌이에요."
+  },
+  {
+    "text": "미세하게나마 나아질 수 있다는 생각이 들어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "상황을 다시 생각해보니 새로운 시각이 생겼어요."
+  },
+  {
+    "text": "으아아아악 아ㅠㅠ",
+    "should_transition": true,
+    "previous_text": "미세하게나마 나아질 수 있다는 생각이 들어요 그런 느낌이에요."
+  },
+  {
+    "text": "생각이 바뀌기 시작했어요 최근에 그런 느낌이 자주 들어요.",
+    "should_transition": false,
+    "previous_text": "으아아아악 아ㅠㅠ"
+  },
+  {
+    "text": "나를 생각하게 된 건 처음이에요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "생각이 바뀌기 시작했어요 최근에 그런 느낌이 자주 들어요."
+  },
+  {
+    "text": "말하다 보니 감정이 정리되는 것 같아요 아마 그랬던 적이 있어요.",
+    "should_transition": false,
+    "previous_text": "나를 생각하게 된 건 처음이에요 그런 느낌이에요."
+  },
+  {
+    "text": "듣기 싫어",
+    "should_transition": true,
+    "previous_text": "말하다 보니 감정이 정리되는 것 같아요 아마 그랬던 적이 있어요."
+  },
+  {
+    "text": "도저히 납득 안 돼 헉",
+    "should_transition": true,
+    "previous_text": "듣기 싫어"
+  },
+  {
+    "text": "혼자 끙끙 앓지 않아서 좋아요 그런 마음이 생겼어요.",
+    "should_transition": false,
+    "previous_text": "도저히 납득 안 돼 헉"
+  },
+  {
+    "text": "더는 듣기 싫어 이런이런",
+    "should_transition": true,
+    "previous_text": "혼자 끙끙 앓지 않아서 좋아요 그런 마음이 생겼어요."
+  },
+  {
+    "text": "됐다고 했잖아 아아아",
+    "should_transition": true,
+    "previous_text": "더는 듣기 싫어 이런이런"
+  },
+  {
+    "text": "그냥 꺼져 하지마하지마",
+    "should_transition": true,
+    "previous_text": "됐다고 했잖아 아아아"
+  },
+  {
+    "text": "혼자 끙끙 앓지 않아서 좋아요 솔직히 털어놓을 수 있어서 감사해요.",
+    "should_transition": false,
+    "previous_text": "그냥 꺼져 하지마하지마"
+  },
+  {
+    "text": "이야기하면서 마음이 편해졌어요 이야기할 수 있어서 마음이 편해요.",
+    "should_transition": false,
+    "previous_text": "혼자 끙끙 앓지 않아서 좋아요 솔직히 털어놓을 수 있어서 감사해요."
+  },
+  {
+    "text": "예전에는 도망쳤던 기억이 있어요 그랬던 시절이 있었죠.",
+    "should_transition": false,
+    "previous_text": "이야기하면서 마음이 편해졌어요 이야기할 수 있어서 마음이 편해요."
+  },
+  {
+    "text": "짜증나 죽겠어 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "예전에는 도망쳤던 기억이 있어요 그랬던 시절이 있었죠."
+  },
+  {
+    "text": "헛소리 하지 마 아아아",
+    "should_transition": true,
+    "previous_text": "짜증나 죽겠어 ㅋㅋㅋ"
+  },
+  {
+    "text": "짜증나 죽겠어 악악악",
+    "should_transition": true,
+    "previous_text": "헛소리 하지 마 아아아"
+  },
+  {
+    "text": "그냥 꺼져 안돼안돼안돼",
+    "should_transition": true,
+    "previous_text": "짜증나 죽겠어 악악악"
+  },
+  {
+    "text": "진짜 의미 없어",
+    "should_transition": true,
+    "previous_text": "그냥 꺼져 안돼안돼안돼"
+  },
+  {
+    "text": "참견하지 마 아아아",
+    "should_transition": true,
+    "previous_text": "진짜 의미 없어"
+  },
+  {
+    "text": "됐다고 했잖아 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "참견하지 마 아아아"
+  },
+  {
+    "text": "마음을 열어보려 노력하고 있어요 말로 꺼낼 수 있어서 후련해요.",
+    "should_transition": false,
+    "previous_text": "됐다고 했잖아 ㅠㅠㅠ"
+  },
+  {
+    "text": "왜 이런 거야 뭐래",
+    "should_transition": true,
+    "previous_text": "마음을 열어보려 노력하고 있어요 말로 꺼낼 수 있어서 후련해요."
+  },
+  {
+    "text": "짜증나 죽겠어 정말정말",
+    "should_transition": true,
+    "previous_text": "왜 이런 거야 뭐래"
+  },
+  {
+    "text": "마음이 조금 가벼워졌어요 표현하고 나니 한결 가벼워요.",
+    "should_transition": false,
+    "previous_text": "짜증나 죽겠어 정말정말"
+  },
+  {
+    "text": "내 감정을 솔직하게 표현해보니 좋았어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "마음이 조금 가벼워졌어요 표현하고 나니 한결 가벼워요."
+  },
+  {
+    "text": "조금씩이라도 변화하고 싶다는 생각이 들어요.",
+    "should_transition": false,
+    "previous_text": "내 감정을 솔직하게 표현해보니 좋았어요 그런 느낌이에요."
+  },
+  {
+    "text": "하... 모르겠다 아아아",
+    "should_transition": true,
+    "previous_text": "조금씩이라도 변화하고 싶다는 생각이 들어요."
+  },
+  {
+    "text": "듣기 싫어 하하하",
+    "should_transition": true,
+    "previous_text": "하... 모르겠다 아아아"
+  },
+  {
+    "text": "귀찮아 못 하겠어 뭐래",
+    "should_transition": true,
+    "previous_text": "듣기 싫어 하하하"
+  },
+  {
+    "text": "진짜 의미 없어 뭐래",
+    "should_transition": true,
+    "previous_text": "귀찮아 못 하겠어 뭐래"
+  },
+  {
+    "text": "감정을 표현할 수 있어서 다행이에요 표현하고 나니 한결 가벼워요.",
+    "should_transition": false,
+    "previous_text": "진짜 의미 없어 뭐래"
+  },
+  {
+    "text": "조금은 감정을 파악할 수 있을 것 같아요 그랬던 시절이 있었죠.",
+    "should_transition": false,
+    "previous_text": "감정을 표현할 수 있어서 다행이에요 표현하고 나니 한결 가벼워요."
+  },
+  {
+    "text": "몰라 진짜 짜증나 완전완전",
+    "should_transition": true,
+    "previous_text": "조금은 감정을 파악할 수 있을 것 같아요 그랬던 시절이 있었죠."
+  },
+  {
+    "text": "그만 좀 해 하하하",
+    "should_transition": true,
+    "previous_text": "몰라 진짜 짜증나 완전완전"
+  },
+  {
+    "text": "상담을 통해 나를 이해하게 되었어요 그랬던 시절이 있었죠.",
+    "should_transition": false,
+    "previous_text": "그만 좀 해 하하하"
+  },
+  {
+    "text": "예전에는 도망쳤던 기억이 있어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "상담을 통해 나를 이해하게 되었어요 그랬던 시절이 있었죠."
+  },
+  {
+    "text": "그런 소리는 듣기 싫어",
+    "should_transition": true,
+    "previous_text": "예전에는 도망쳤던 기억이 있어요 그런 느낌이에요."
+  },
+  {
+    "text": "이런 기분은 처음이에요",
+    "should_transition": false,
+    "previous_text": "그런 소리는 듣기 싫어"
+  },
+  {
+    "text": "상황을 다시 생각해보니 새로운 시각이 생겼어요 말로 꺼낼 수 있어서 후련해요.",
+    "should_transition": false,
+    "previous_text": "이런 기분은 처음이에요"
+  },
+  {
+    "text": "감정을 이해받는 것만으로 위로가 돼요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "상황을 다시 생각해보니 새로운 시각이 생겼어요 말로 꺼낼 수 있어서 후련해요."
+  },
+  {
+    "text": "전에는 이런 얘길 꺼내기 어려웠어요.",
+    "should_transition": false,
+    "previous_text": "감정을 이해받는 것만으로 위로가 돼요 그런 느낌이에요."
+  },
+  {
+    "text": "생각이 바뀌기 시작했어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "전에는 이런 얘길 꺼내기 어려웠어요."
+  },
+  {
+    "text": "감정을 이해받는 것만으로 위로가 돼요 드러낼 수 있어서 다행이에요.",
+    "should_transition": false,
+    "previous_text": "생각이 바뀌기 시작했어요 그런 느낌이에요."
+  },
+  {
+    "text": "희미하게나마 빛이 보이는 것 같아요",
+    "should_transition": false,
+    "previous_text": "감정을 이해받는 것만으로 위로가 돼요 드러낼 수 있어서 다행이에요."
+  },
+  {
+    "text": "이야기하면서 마음이 편해졌어요 그랬던 시절이 있었죠.",
+    "should_transition": false,
+    "previous_text": "희미하게나마 빛이 보이는 것 같아요"
+  },
+  {
+    "text": "말하다 보니 감정이 정리되는 것 같아요",
+    "should_transition": false,
+    "previous_text": "이야기하면서 마음이 편해졌어요 그랬던 시절이 있었죠."
+  },
+  {
+    "text": "이야기하면서 마음이 편해졌어요.",
+    "should_transition": false,
+    "previous_text": "말하다 보니 감정이 정리되는 것 같아요"
+  },
+  {
+    "text": "전에는 이런 얘길 꺼내기 어려웠어요 드러낼 수 있어서 다행이에요.",
+    "should_transition": false,
+    "previous_text": "이야기하면서 마음이 편해졌어요."
+  },
+  {
+    "text": "생각이 바뀌기 시작했어요 그런 일이 있었던 것 같아요.",
+    "should_transition": false,
+    "previous_text": "전에는 이런 얘길 꺼내기 어려웠어요 드러낼 수 있어서 다행이에요."
+  },
+  {
+    "text": "감정을 표현할 수 있어서 다행이에요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "생각이 바뀌기 시작했어요 그런 일이 있었던 것 같아요."
+  },
+  {
+    "text": "진짜 의미 없어 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "감정을 표현할 수 있어서 다행이에요 그런 느낌이에요."
+  },
+  {
+    "text": "희망이라는 단어가 떠올라요",
+    "should_transition": false,
+    "previous_text": "진짜 의미 없어 ㅋㅋㅋ"
+  },
+  {
+    "text": "스스로를 돌아보게 되었어요 그런 마음이 자꾸 들어요.",
+    "should_transition": false,
+    "previous_text": "희망이라는 단어가 떠올라요"
+  },
+  {
+    "text": "감정을 이해받는 것만으로 위로가 돼요.",
+    "should_transition": false,
+    "previous_text": "스스로를 돌아보게 되었어요 그런 마음이 자꾸 들어요."
+  },
+  {
+    "text": "용기 내서 말해봤어요 요 며칠 그런 감정이 올라왔어요.",
+    "should_transition": false,
+    "previous_text": "감정을 이해받는 것만으로 위로가 돼요."
+  },
+  {
+    "text": "몰라 진짜 짜증나 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "용기 내서 말해봤어요 요 며칠 그런 감정이 올라왔어요."
+  },
+  {
+    "text": "에휴 다 싫어 하하하",
+    "should_transition": true,
+    "previous_text": "몰라 진짜 짜증나 ㅋㅋㅋ"
+  },
+  {
+    "text": "생각이 바뀌기 시작했어요.",
+    "should_transition": false,
+    "previous_text": "에휴 다 싫어 하하하"
+  },
+  {
+    "text": "아 몰라 진짜 아ㅠㅠ",
+    "should_transition": true,
+    "previous_text": "생각이 바뀌기 시작했어요."
+  },
+  {
+    "text": "내 감정을 솔직하게 표현해보니 좋았어요",
+    "should_transition": false,
+    "previous_text": "아 몰라 진짜 아ㅠㅠ"
+  },
+  {
+    "text": "말하고 나니 마음이 놓여요 말로 꺼낼 수 있어서 후련해요.",
+    "should_transition": false,
+    "previous_text": "내 감정을 솔직하게 표현해보니 좋았어요"
+  },
+  {
+    "text": "희미하게나마 빛이 보이는 것 같아요 드러낼 수 있어서 다행이에요.",
+    "should_transition": false,
+    "previous_text": "말하고 나니 마음이 놓여요 말로 꺼낼 수 있어서 후련해요."
+  },
+  {
+    "text": "됐다고 했잖아 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "희미하게나마 빛이 보이는 것 같아요 드러낼 수 있어서 다행이에요."
+  },
+  {
+    "text": "짜증나 죽겠어 아ㅠㅠ",
+    "should_transition": true,
+    "previous_text": "됐다고 했잖아 ㅠㅠㅠ"
+  },
+  {
+    "text": "도대체 이건 뭔데 아ㅠㅠ",
+    "should_transition": true,
+    "previous_text": "짜증나 죽겠어 아ㅠㅠ"
+  },
+  {
+    "text": "으아아아악 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "도대체 이건 뭔데 아ㅠㅠ"
+  },
+  {
+    "text": "말 같지도 않아 안돼안돼안돼",
+    "should_transition": true,
+    "previous_text": "으아아아악 ㅋㅋㅋ"
+  },
+  {
+    "text": "내 감정을 솔직하게 표현해보니 좋았어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "말 같지도 않아 안돼안돼안돼"
+  },
+  {
+    "text": "내 마음이 어떤 상태인지 감이 와요 가끔 그런 생각이 맴돌아요.",
+    "should_transition": false,
+    "previous_text": "내 감정을 솔직하게 표현해보니 좋았어요 그런 느낌이에요."
+  },
+  {
+    "text": "말시키지 마 악악악",
+    "should_transition": true,
+    "previous_text": "내 마음이 어떤 상태인지 감이 와요 가끔 그런 생각이 맴돌아요."
+  },
+  {
+    "text": "듣기 싫어",
+    "should_transition": true,
+    "previous_text": "말시키지 마 악악악"
+  },
+  {
+    "text": "스스로를 돌아보게 되었어요 그런 기억이 나는 것 같아요.",
+    "should_transition": false,
+    "previous_text": "듣기 싫어"
+  },
+  {
+    "text": "용기 내서 말해봤어요.",
+    "should_transition": false,
+    "previous_text": "스스로를 돌아보게 되었어요 그런 기억이 나는 것 같아요."
+  },
+  {
+    "text": "용기 내서 말해봤어요.",
+    "should_transition": false,
+    "previous_text": "용기 내서 말해봤어요."
+  },
+  {
+    "text": "됐다고 했잖아 아아아",
+    "should_transition": true,
+    "previous_text": "용기 내서 말해봤어요."
+  },
+  {
+    "text": "짜증나 죽겠어 아아아",
+    "should_transition": true,
+    "previous_text": "됐다고 했잖아 아아아"
+  },
+  {
+    "text": "아 몰라 진짜 하하하",
+    "should_transition": true,
+    "previous_text": "짜증나 죽겠어 아아아"
+  },
+  {
+    "text": "그건 진짜 말이 안 돼 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "아 몰라 진짜 하하하"
+  },
+  {
+    "text": "용기 내서 말해봤어요",
+    "should_transition": false,
+    "previous_text": "그건 진짜 말이 안 돼 ㅋㅋㅋ"
+  },
+  {
+    "text": "하... 모르겠다",
+    "should_transition": true,
+    "previous_text": "용기 내서 말해봤어요"
+  },
+  {
+    "text": "조금씩 내 마음을 인정해보려고요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "하... 모르겠다"
+  },
+  {
+    "text": "그냥 꺼져",
+    "should_transition": true,
+    "previous_text": "조금씩 내 마음을 인정해보려고요 그런 느낌이에요."
+  },
+  {
+    "text": "혼자 끙끙 앓지 않아서 좋아요 요 며칠 그런 감정이 올라왔어요.",
+    "should_transition": false,
+    "previous_text": "그냥 꺼져"
+  },
+  {
+    "text": "마음을 열어보려 노력하고 있어요.",
+    "should_transition": false,
+    "previous_text": "혼자 끙끙 앓지 않아서 좋아요 요 며칠 그런 감정이 올라왔어요."
+  },
+  {
+    "text": "짜증나 죽겠어 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "마음을 열어보려 노력하고 있어요."
+  },
+  {
+    "text": "작은 변화의 조짐이 보여요",
+    "should_transition": false,
+    "previous_text": "짜증나 죽겠어 ㅠㅠㅠ"
+  },
+  {
+    "text": "듣기 싫어",
+    "should_transition": true,
+    "previous_text": "작은 변화의 조짐이 보여요"
+  },
+  {
+    "text": "내 감정을 솔직하게 표현해보니 좋았어요 표현하고 나니 한결 가벼워요.",
+    "should_transition": false,
+    "previous_text": "듣기 싫어"
+  },
+  {
+    "text": "꺼져 제발 아ㅠㅠ",
+    "should_transition": true,
+    "previous_text": "내 감정을 솔직하게 표현해보니 좋았어요 표현하고 나니 한결 가벼워요."
+  },
+  {
+    "text": "감정을 표현할 수 있어서 다행이에요 가끔 그런 생각이 맴돌아요.",
+    "should_transition": false,
+    "previous_text": "꺼져 제발 아ㅠㅠ"
+  },
+  {
+    "text": "닥쳐 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "감정을 표현할 수 있어서 다행이에요 가끔 그런 생각이 맴돌아요."
+  },
+  {
+    "text": "몰라 진짜 짜증나 하하하",
+    "should_transition": true,
+    "previous_text": "닥쳐 ㅋㅋㅋ"
+  },
+  {
+    "text": "속이 조금 시원해졌어요.",
+    "should_transition": false,
+    "previous_text": "몰라 진짜 짜증나 하하하"
+  },
+  {
+    "text": "말하다 보니 감정이 정리되는 것 같아요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "속이 조금 시원해졌어요."
+  },
+  {
+    "text": "말하고 나니 마음이 놓여요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "말하다 보니 감정이 정리되는 것 같아요 그런 느낌이에요."
+  },
+  {
+    "text": "조금씩이라도 변화하고 싶다는 생각이 들어요 그런 마음이 생겼어요.",
+    "should_transition": false,
+    "previous_text": "말하고 나니 마음이 놓여요 그런 느낌이에요."
+  },
+  {
+    "text": "됐다고 했잖아 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "조금씩이라도 변화하고 싶다는 생각이 들어요 그런 마음이 생겼어요."
+  },
+  {
+    "text": "황당하네 정말정말",
+    "should_transition": true,
+    "previous_text": "됐다고 했잖아 ㅠㅠㅠ"
+  },
+  {
+    "text": "내가 나를 돌보는 느낌이에요 드러낼 수 있어서 다행이에요.",
+    "should_transition": false,
+    "previous_text": "황당하네 정말정말"
+  },
+  {
+    "text": "조금은 감정을 파악할 수 있을 것 같아요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "내가 나를 돌보는 느낌이에요 드러낼 수 있어서 다행이에요."
+  },
+  {
+    "text": "으아아아악 아아아",
+    "should_transition": true,
+    "previous_text": "조금은 감정을 파악할 수 있을 것 같아요 그런 느낌이에요."
+  },
+  {
+    "text": "예전에는 도망쳤던 기억이 있어요 가끔 그런 생각이 맴돌아요.",
+    "should_transition": false,
+    "previous_text": "으아아아악 아아아"
+  },
+  {
+    "text": "조금씩이라도 변화하고 싶다는 생각이 들어요.",
+    "should_transition": false,
+    "previous_text": "예전에는 도망쳤던 기억이 있어요 가끔 그런 생각이 맴돌아요."
+  },
+  {
+    "text": "더 이상 못 하겠어 아아아",
+    "should_transition": true,
+    "previous_text": "조금씩이라도 변화하고 싶다는 생각이 들어요."
+  },
+  {
+    "text": "그건 진짜 말이 안 돼 하하하",
+    "should_transition": true,
+    "previous_text": "더 이상 못 하겠어 아아아"
+  },
+  {
+    "text": "말하다 보니 감정이 정리되는 것 같아요 최근에 그런 느낌이 자주 들어요.",
+    "should_transition": false,
+    "previous_text": "그건 진짜 말이 안 돼 하하하"
+  },
+  {
+    "text": "짜증나 죽겠어 아아아",
+    "should_transition": true,
+    "previous_text": "말하다 보니 감정이 정리되는 것 같아요 최근에 그런 느낌이 자주 들어요."
+  },
+  {
+    "text": "마음이 조금 가벼워졌어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "짜증나 죽겠어 아아아"
+  },
+  {
+    "text": "그때는 이런 표현이 힘들었어요",
+    "should_transition": false,
+    "previous_text": "마음이 조금 가벼워졌어요 그런 느낌이에요."
+  },
+  {
+    "text": "됐다고 했잖아",
+    "should_transition": true,
+    "previous_text": "그때는 이런 표현이 힘들었어요"
+  },
+  {
+    "text": "에휴 다 싫어 뭐래",
+    "should_transition": true,
+    "previous_text": "됐다고 했잖아"
+  },
+  {
+    "text": "듣기 싫어 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "에휴 다 싫어 뭐래"
+  },
+  {
+    "text": "진짜 의미 없어 아아아",
+    "should_transition": true,
+    "previous_text": "듣기 싫어 ㅋㅋㅋ"
+  },
+  {
+    "text": "아 몰라 진짜",
+    "should_transition": true,
+    "previous_text": "진짜 의미 없어 아아아"
+  },
+  {
+    "text": "하... 모르겠다 아아아",
+    "should_transition": true,
+    "previous_text": "아 몰라 진짜"
+  },
+  {
+    "text": "말시키지 마 정말정말",
+    "should_transition": true,
+    "previous_text": "하... 모르겠다 아아아"
+  },
+  {
+    "text": "도대체 이건 뭔데 안돼안돼안돼",
+    "should_transition": true,
+    "previous_text": "말시키지 마 정말정말"
+  },
+  {
+    "text": "용기 내서 말해봤어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "도대체 이건 뭔데 안돼안돼안돼"
+  },
+  {
+    "text": "됐다고 했잖아",
+    "should_transition": true,
+    "previous_text": "용기 내서 말해봤어요 그런 느낌이에요."
+  },
+  {
+    "text": "더 이상 말하지 마 헉",
+    "should_transition": true,
+    "previous_text": "됐다고 했잖아"
+  },
+  {
+    "text": "감정을 이해받는 것만으로 위로가 돼요",
+    "should_transition": false,
+    "previous_text": "더 이상 말하지 마 헉"
+  },
+  {
+    "text": "됐다고 했잖아 뭐래",
+    "should_transition": true,
+    "previous_text": "감정을 이해받는 것만으로 위로가 돼요"
+  },
+  {
+    "text": "내버려 둬",
+    "should_transition": true,
+    "previous_text": "됐다고 했잖아 뭐래"
+  },
+  {
+    "text": "말 같지도 않아 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "내버려 둬"
+  },
+  {
+    "text": "이제 됐다고 했잖아 하하하",
+    "should_transition": true,
+    "previous_text": "말 같지도 않아 ㅠㅠㅠ"
+  },
+  {
+    "text": "말하다 보니 감정이 정리되는 것 같아요.",
+    "should_transition": false,
+    "previous_text": "이제 됐다고 했잖아 하하하"
+  },
+  {
+    "text": "작은 변화의 조짐이 보여요.",
+    "should_transition": false,
+    "previous_text": "말하다 보니 감정이 정리되는 것 같아요."
+  },
+  {
+    "text": "스스로를 돌아보게 되었어요 그런 일이 있었던 것 같아요.",
+    "should_transition": false,
+    "previous_text": "작은 변화의 조짐이 보여요."
+  },
+  {
+    "text": "혼자 끙끙 앓지 않아서 좋아요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "스스로를 돌아보게 되었어요 그런 일이 있었던 것 같아요."
+  },
+  {
+    "text": "그만하자 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "혼자 끙끙 앓지 않아서 좋아요 그런 느낌이에요."
+  },
+  {
+    "text": "갑자기 이게 뭐람 아아아",
+    "should_transition": true,
+    "previous_text": "그만하자 ㅋㅋㅋ"
+  },
+  {
+    "text": "스스로를 돌아보게 되었어요",
+    "should_transition": false,
+    "previous_text": "갑자기 이게 뭐람 아아아"
+  },
+  {
+    "text": "말하다 보니 감정이 정리되는 것 같아요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "스스로를 돌아보게 되었어요"
+  },
+  {
+    "text": "말시키지 마 아아아",
+    "should_transition": true,
+    "previous_text": "말하다 보니 감정이 정리되는 것 같아요 그런 느낌이에요."
+  },
+  {
+    "text": "전에는 이런 얘길 꺼내기 어려웠어요 그런 마음이 자꾸 들어요.",
+    "should_transition": false,
+    "previous_text": "말시키지 마 아아아"
+  },
+  {
+    "text": "귀찮아 못 하겠어 헉",
+    "should_transition": true,
+    "previous_text": "전에는 이런 얘길 꺼내기 어려웠어요 그런 마음이 자꾸 들어요."
+  },
+  {
+    "text": "말하고 나니 마음이 놓여요 그런 마음이 자꾸 들어요.",
+    "should_transition": false,
+    "previous_text": "귀찮아 못 하겠어 헉"
+  },
+  {
+    "text": "상황을 다시 생각해보니 새로운 시각이 생겼어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "말하고 나니 마음이 놓여요 그런 마음이 자꾸 들어요."
+  },
+  {
+    "text": "예전에는 도망쳤던 기억이 있어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "상황을 다시 생각해보니 새로운 시각이 생겼어요 그런 느낌이에요."
+  },
+  {
+    "text": "혼자 끙끙 앓지 않아서 좋아요 말로 꺼낼 수 있어서 후련해요.",
+    "should_transition": false,
+    "previous_text": "예전에는 도망쳤던 기억이 있어요 그런 느낌이에요."
+  },
+  {
+    "text": "하... 모르겠다 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "혼자 끙끙 앓지 않아서 좋아요 말로 꺼낼 수 있어서 후련해요."
+  },
+  {
+    "text": "이제서야 나 자신을 챙기고 있어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "하... 모르겠다 ㅠㅠㅠ"
+  },
+  {
+    "text": "이야기하면서 마음이 편해졌어요 그렇게 느껴졌던 순간이 있어요.",
+    "should_transition": false,
+    "previous_text": "이제서야 나 자신을 챙기고 있어요 그런 느낌이에요."
+  },
+  {
+    "text": "감정을 이해받는 것만으로 위로가 돼요 이야기할 수 있어서 마음이 편해요.",
+    "should_transition": false,
+    "previous_text": "이야기하면서 마음이 편해졌어요 그렇게 느껴졌던 순간이 있어요."
+  },
+  {
+    "text": "몰라 진짜 짜증나",
+    "should_transition": true,
+    "previous_text": "감정을 이해받는 것만으로 위로가 돼요 이야기할 수 있어서 마음이 편해요."
+  },
+  {
+    "text": "마음을 열어보려 노력하고 있어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "몰라 진짜 짜증나"
+  },
+  {
+    "text": "정말 하기 싫어 아아아",
+    "should_transition": true,
+    "previous_text": "마음을 열어보려 노력하고 있어요 그런 느낌이에요."
+  },
+  {
+    "text": "아 몰라 진짜 정말정말",
+    "should_transition": true,
+    "previous_text": "정말 하기 싫어 아아아"
+  },
+  {
+    "text": "닥쳐",
+    "should_transition": true,
+    "previous_text": "아 몰라 진짜 정말정말"
+  },
+  {
+    "text": "감정을 표현할 수 있어서 다행이에요 말로 꺼낼 수 있어서 후련해요.",
+    "should_transition": false,
+    "previous_text": "닥쳐"
+  },
+  {
+    "text": "스스로를 돌아보게 되었어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "감정을 표현할 수 있어서 다행이에요 말로 꺼낼 수 있어서 후련해요."
+  },
+  {
+    "text": "상담을 통해 나를 이해하게 되었어요 표현하고 나니 한결 가벼워요.",
+    "should_transition": false,
+    "previous_text": "스스로를 돌아보게 되었어요 그런 느낌이에요."
+  },
+  {
+    "text": "감정의 실마리가 잡혀요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "상담을 통해 나를 이해하게 되었어요 표현하고 나니 한결 가벼워요."
+  },
+  {
+    "text": "희미하게나마 빛이 보이는 것 같아요",
+    "should_transition": false,
+    "previous_text": "감정의 실마리가 잡혀요 그런 느낌이에요."
+  },
+  {
+    "text": "이런 말은 한 번도 해본 적 없어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "희미하게나마 빛이 보이는 것 같아요"
+  },
+  {
+    "text": "하... 모르겠다 뭐래",
+    "should_transition": true,
+    "previous_text": "이런 말은 한 번도 해본 적 없어요 그런 느낌이에요."
+  },
+  {
+    "text": "헛소리 하지 마 하하하",
+    "should_transition": true,
+    "previous_text": "하... 모르겠다 뭐래"
+  },
+  {
+    "text": "으아아아악",
+    "should_transition": true,
+    "previous_text": "헛소리 하지 마 하하하"
+  },
+  {
+    "text": "이야기하면서 마음이 편해졌어요 이야기할 수 있어서 마음이 편해요.",
+    "should_transition": false,
+    "previous_text": "으아아아악"
+  },
+  {
+    "text": "에휴 다 싫어 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "이야기하면서 마음이 편해졌어요 이야기할 수 있어서 마음이 편해요."
+  },
+  {
+    "text": "조금씩 내 마음을 인정해보려고요 최근에 그런 느낌이 자주 들어요.",
+    "should_transition": false,
+    "previous_text": "에휴 다 싫어 ㅋㅋㅋ"
+  },
+  {
+    "text": "스스로를 돌아보게 되었어요 그런 일이 있었던 것 같아요.",
+    "should_transition": false,
+    "previous_text": "조금씩 내 마음을 인정해보려고요 최근에 그런 느낌이 자주 들어요."
+  },
+  {
+    "text": "상담을 통해 나를 이해하게 되었어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "스스로를 돌아보게 되었어요 그런 일이 있었던 것 같아요."
+  },
+  {
+    "text": "감정을 표현할 수 있어서 다행이에요 그런 마음이 생겼어요.",
+    "should_transition": false,
+    "previous_text": "상담을 통해 나를 이해하게 되었어요 그런 느낌이에요."
+  },
+  {
+    "text": "귀찮아 못 하겠어 노노노",
+    "should_transition": true,
+    "previous_text": "감정을 표현할 수 있어서 다행이에요 그런 마음이 생겼어요."
+  },
+  {
+    "text": "이건 좀 아닌 것 같아 절대안돼",
+    "should_transition": true,
+    "previous_text": "귀찮아 못 하겠어 노노노"
+  },
+  {
+    "text": "스스로를 돌아보게 되었어요 드러낼 수 있어서 다행이에요.",
+    "should_transition": false,
+    "previous_text": "이건 좀 아닌 것 같아 절대안돼"
+  },
+  {
+    "text": "듣기 싫어 뭐래",
+    "should_transition": true,
+    "previous_text": "스스로를 돌아보게 되었어요 드러낼 수 있어서 다행이에요."
+  },
+  {
+    "text": "하고 싶지 않아 노노노",
+    "should_transition": true,
+    "previous_text": "듣기 싫어 뭐래"
+  },
+  {
+    "text": "마음을 열어보려 노력하고 있어요.",
+    "should_transition": false,
+    "previous_text": "하고 싶지 않아 노노노"
+  },
+  {
+    "text": "조금씩 내 마음을 인정해보려고요.",
+    "should_transition": false,
+    "previous_text": "마음을 열어보려 노력하고 있어요."
+  },
+  {
+    "text": "듣기 싫어 이런이런",
+    "should_transition": true,
+    "previous_text": "조금씩 내 마음을 인정해보려고요."
+  },
+  {
+    "text": "조금씩 내 마음을 인정해보려고요 말로 꺼낼 수 있어서 후련해요.",
+    "should_transition": false,
+    "previous_text": "듣기 싫어 이런이런"
+  },
+  {
+    "text": "스스로를 돌아보게 되었어요 드러낼 수 있어서 다행이에요.",
+    "should_transition": false,
+    "previous_text": "조금씩 내 마음을 인정해보려고요 말로 꺼낼 수 있어서 후련해요."
+  },
+  {
+    "text": "생각이 바뀌기 시작했어요",
+    "should_transition": false,
+    "previous_text": "스스로를 돌아보게 되었어요 드러낼 수 있어서 다행이에요."
+  },
+  {
+    "text": "조금씩 내 마음을 인정해보려고요.",
+    "should_transition": false,
+    "previous_text": "생각이 바뀌기 시작했어요"
+  },
+  {
+    "text": "스스로를 돌아보게 되었어요 최근에 그런 느낌이 자주 들어요.",
+    "should_transition": false,
+    "previous_text": "조금씩 내 마음을 인정해보려고요."
+  },
+  {
+    "text": "내 감정을 솔직하게 표현해보니 좋았어요 최근에 그런 느낌이 자주 들어요.",
+    "should_transition": false,
+    "previous_text": "스스로를 돌아보게 되었어요 최근에 그런 느낌이 자주 들어요."
+  },
+  {
+    "text": "그냥 꺼져 아ㅠㅠ",
+    "should_transition": true,
+    "previous_text": "내 감정을 솔직하게 표현해보니 좋았어요 최근에 그런 느낌이 자주 들어요."
+  },
+  {
+    "text": "내버려 둬 노노노",
+    "should_transition": true,
+    "previous_text": "그냥 꺼져 아ㅠㅠ"
+  },
+  {
+    "text": "용기 내서 말해봤어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "내버려 둬 노노노"
+  },
+  {
+    "text": "듣기 싫어",
+    "should_transition": true,
+    "previous_text": "용기 내서 말해봤어요 그런 느낌이에요."
+  },
+  {
+    "text": "참견하지 마 하하하",
+    "should_transition": true,
+    "previous_text": "듣기 싫어"
+  },
+  {
+    "text": "짜증나 죽겠어 아아아",
+    "should_transition": true,
+    "previous_text": "참견하지 마 하하하"
+  },
+  {
+    "text": "닥쳐 진심진심",
+    "should_transition": true,
+    "previous_text": "짜증나 죽겠어 아아아"
+  },
+  {
+    "text": "아 몰라 진짜 아아아",
+    "should_transition": true,
+    "previous_text": "닥쳐 진심진심"
+  },
+  {
+    "text": "내 감정을 솔직하게 표현해보니 좋았어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "아 몰라 진짜 아아아"
+  },
+  {
+    "text": "스스로를 돌아보게 되었어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "내 감정을 솔직하게 표현해보니 좋았어요 그런 느낌이에요."
+  },
+  {
+    "text": "상담을 통해 나를 이해하게 되었어요 그런 일이 있었던 것 같아요.",
+    "should_transition": false,
+    "previous_text": "스스로를 돌아보게 되었어요 그런 느낌이에요."
+  },
+  {
+    "text": "그냥 꺼져 헉",
+    "should_transition": true,
+    "previous_text": "상담을 통해 나를 이해하게 되었어요 그런 일이 있었던 것 같아요."
+  },
+  {
+    "text": "생각이 바뀌기 시작했어요",
+    "should_transition": false,
+    "previous_text": "그냥 꺼져 헉"
+  },
+  {
+    "text": "과거엔 말조차 못 꺼냈어요.",
+    "should_transition": false,
+    "previous_text": "생각이 바뀌기 시작했어요"
+  },
+  {
+    "text": "희망이라는 단어가 떠올라요.",
+    "should_transition": false,
+    "previous_text": "과거엔 말조차 못 꺼냈어요."
+  },
+  {
+    "text": "그때는 이런 표현이 힘들었어요.",
+    "should_transition": false,
+    "previous_text": "희망이라는 단어가 떠올라요."
+  },
+  {
+    "text": "귀찮아 못 하겠어 악악악",
+    "should_transition": true,
+    "previous_text": "그때는 이런 표현이 힘들었어요."
+  },
+  {
+    "text": "진짜 의미 없어 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "귀찮아 못 하겠어 악악악"
+  },
+  {
+    "text": "그건 진짜 말이 안 돼",
+    "should_transition": true,
+    "previous_text": "진짜 의미 없어 ㅠㅠㅠ"
+  },
+  {
+    "text": "생각이 바뀌기 시작했어요 아마 그랬던 적이 있어요.",
+    "should_transition": false,
+    "previous_text": "그건 진짜 말이 안 돼"
+  },
+  {
+    "text": "에휴 다 싫어 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "생각이 바뀌기 시작했어요 아마 그랬던 적이 있어요."
+  },
+  {
+    "text": "털어놓고 나니 편안해졌어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "에휴 다 싫어 ㅠㅠㅠ"
+  },
+  {
+    "text": "에휴 다 싫어 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "털어놓고 나니 편안해졌어요 그런 느낌이에요."
+  },
+  {
+    "text": "말시키지 마 아아아",
+    "should_transition": true,
+    "previous_text": "에휴 다 싫어 ㅋㅋㅋ"
+  },
+  {
+    "text": "감정을 표현할 수 있어서 다행이에요 말로 꺼낼 수 있어서 후련해요.",
+    "should_transition": false,
+    "previous_text": "말시키지 마 아아아"
+  },
+  {
+    "text": "이런 기분은 처음이에요 그랬던 시절이 있었죠.",
+    "should_transition": false,
+    "previous_text": "감정을 표현할 수 있어서 다행이에요 말로 꺼낼 수 있어서 후련해요."
+  },
+  {
+    "text": "마음을 열어보려 노력하고 있어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "이런 기분은 처음이에요 그랬던 시절이 있었죠."
+  },
+  {
+    "text": "그냥 꺼져 그건싫어",
+    "should_transition": true,
+    "previous_text": "마음을 열어보려 노력하고 있어요 그런 느낌이에요."
+  },
+  {
+    "text": "그만 좀 해 아아아",
+    "should_transition": true,
+    "previous_text": "그냥 꺼져 그건싫어"
+  },
+  {
+    "text": "으아아아악 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "그만 좀 해 아아아"
+  },
+  {
+    "text": "그냥 꺼져 으아아아",
+    "should_transition": true,
+    "previous_text": "으아아아악 ㅋㅋㅋ"
+  },
+  {
+    "text": "닥쳐 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "그냥 꺼져 으아아아"
+  },
+  {
+    "text": "계속하기 버거워 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "닥쳐 ㅠㅠㅠ"
+  },
+  {
+    "text": "아 몰라 진짜 완전완전",
+    "should_transition": true,
+    "previous_text": "계속하기 버거워 ㅋㅋㅋ"
+  },
+  {
+    "text": "에휴 다 싫어 하하하",
+    "should_transition": true,
+    "previous_text": "아 몰라 진짜 완전완전"
+  },
+  {
+    "text": "닥쳐",
+    "should_transition": true,
+    "previous_text": "에휴 다 싫어 하하하"
+  },
+  {
+    "text": "이야기하니 숨통이 트여요.",
+    "should_transition": false,
+    "previous_text": "닥쳐"
+  },
+  {
+    "text": "그냥 꺼져 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "이야기하니 숨통이 트여요."
+  },
+  {
+    "text": "감정을 표현할 수 있어서 다행이에요",
+    "should_transition": false,
+    "previous_text": "그냥 꺼져 ㅠㅠㅠ"
+  },
+  {
+    "text": "감정을 표현할 수 있어서 다행이에요.",
+    "should_transition": false,
+    "previous_text": "감정을 표현할 수 있어서 다행이에요"
+  },
+  {
+    "text": "에휴 다 싫어 하하하",
+    "should_transition": true,
+    "previous_text": "감정을 표현할 수 있어서 다행이에요."
+  },
+  {
+    "text": "몰라 진짜 짜증나 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "에휴 다 싫어 하하하"
+  },
+  {
+    "text": "에휴 다 싫어 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "몰라 진짜 짜증나 ㅠㅠㅠ"
+  },
+  {
+    "text": "과거엔 말조차 못 꺼냈어요",
+    "should_transition": false,
+    "previous_text": "에휴 다 싫어 ㅋㅋㅋ"
+  },
+  {
+    "text": "이야기하면서 마음이 편해졌어요 요 며칠 그런 감정이 올라왔어요.",
+    "should_transition": false,
+    "previous_text": "과거엔 말조차 못 꺼냈어요"
+  },
+  {
+    "text": "스스로를 돌아보게 되었어요 최근에 그런 느낌이 자주 들어요.",
+    "should_transition": false,
+    "previous_text": "이야기하면서 마음이 편해졌어요 요 며칠 그런 감정이 올라왔어요."
+  },
+  {
+    "text": "그땐 솔직해지기 힘들었어요 그렇게 느껴졌던 순간이 있어요.",
+    "should_transition": false,
+    "previous_text": "스스로를 돌아보게 되었어요 최근에 그런 느낌이 자주 들어요."
+  },
+  {
+    "text": "됐다고 했잖아 뭐래",
+    "should_transition": true,
+    "previous_text": "그땐 솔직해지기 힘들었어요 그렇게 느껴졌던 순간이 있어요."
+  },
+  {
+    "text": "말하다 보니 감정이 정리되는 것 같아요.",
+    "should_transition": false,
+    "previous_text": "됐다고 했잖아 뭐래"
+  },
+  {
+    "text": "닥쳐 하하하",
+    "should_transition": true,
+    "previous_text": "말하다 보니 감정이 정리되는 것 같아요."
+  },
+  {
+    "text": "에휴 다 싫어 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "닥쳐 하하하"
+  },
+  {
+    "text": "조금씩 내 마음을 인정해보려고요.",
+    "should_transition": false,
+    "previous_text": "에휴 다 싫어 ㅋㅋㅋ"
+  },
+  {
+    "text": "아 몰라 진짜 하하하",
+    "should_transition": true,
+    "previous_text": "조금씩 내 마음을 인정해보려고요."
+  },
+  {
+    "text": "몰라 진짜 짜증나 아아아",
+    "should_transition": true,
+    "previous_text": "아 몰라 진짜 하하하"
+  },
+  {
+    "text": "상담을 통해 나를 이해하게 되었어요 아마 그랬던 적이 있어요.",
+    "should_transition": false,
+    "previous_text": "몰라 진짜 짜증나 아아아"
+  },
+  {
+    "text": "마음을 열어보려 노력하고 있어요 최근에 그런 느낌이 자주 들어요.",
+    "should_transition": false,
+    "previous_text": "상담을 통해 나를 이해하게 되었어요 아마 그랬던 적이 있어요."
+  },
+  {
+    "text": "감정을 이해받는 것만으로 위로가 돼요.",
+    "should_transition": false,
+    "previous_text": "마음을 열어보려 노력하고 있어요 최근에 그런 느낌이 자주 들어요."
+  },
+  {
+    "text": "꺼져 제발 아아아",
+    "should_transition": true,
+    "previous_text": "감정을 이해받는 것만으로 위로가 돼요."
+  },
+  {
+    "text": "희망이라는 단어가 떠올라요.",
+    "should_transition": false,
+    "previous_text": "꺼져 제발 아아아"
+  },
+  {
+    "text": "어렴풋이 내 기분이 이해돼요.",
+    "should_transition": false,
+    "previous_text": "희망이라는 단어가 떠올라요."
+  },
+  {
+    "text": "꺼져 제발 하하하",
+    "should_transition": true,
+    "previous_text": "어렴풋이 내 기분이 이해돼요."
+  },
+  {
+    "text": "짜증나 죽겠어 하지마하지마",
+    "should_transition": true,
+    "previous_text": "꺼져 제발 하하하"
+  },
+  {
+    "text": "하고 싶지 않아 하하하",
+    "should_transition": true,
+    "previous_text": "짜증나 죽겠어 하지마하지마"
+  },
+  {
+    "text": "몰라 진짜 짜증나 아아아",
+    "should_transition": true,
+    "previous_text": "하고 싶지 않아 하하하"
+  },
+  {
+    "text": "내버려 둬 하하하",
+    "should_transition": true,
+    "previous_text": "몰라 진짜 짜증나 아아아"
+  },
+  {
+    "text": "내 감정을 솔직하게 표현해보니 좋았어요.",
+    "should_transition": false,
+    "previous_text": "내버려 둬 하하하"
+  },
+  {
+    "text": "갑자기 이게 뭐람 아아아",
+    "should_transition": true,
+    "previous_text": "내 감정을 솔직하게 표현해보니 좋았어요."
+  },
+  {
+    "text": "감정을 표현할 수 있어서 다행이에요 표현하고 나니 한결 가벼워요.",
+    "should_transition": false,
+    "previous_text": "갑자기 이게 뭐람 아아아"
+  },
+  {
+    "text": "됐다고 했잖아 뭐래",
+    "should_transition": true,
+    "previous_text": "감정을 표현할 수 있어서 다행이에요 표현하고 나니 한결 가벼워요."
+  },
+  {
+    "text": "그땐 솔직해지기 힘들었어요 그런 일이 있었던 것 같아요.",
+    "should_transition": false,
+    "previous_text": "됐다고 했잖아 뭐래"
+  },
+  {
+    "text": "상황을 다시 생각해보니 새로운 시각이 생겼어요 그랬던 시절이 있었죠.",
+    "should_transition": false,
+    "previous_text": "그땐 솔직해지기 힘들었어요 그런 일이 있었던 것 같아요."
+  },
+  {
+    "text": "생각이 바뀌기 시작했어요 표현하고 나니 한결 가벼워요.",
+    "should_transition": false,
+    "previous_text": "상황을 다시 생각해보니 새로운 시각이 생겼어요 그랬던 시절이 있었죠."
+  },
+  {
+    "text": "감정을 이해받는 것만으로 위로가 돼요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "생각이 바뀌기 시작했어요 표현하고 나니 한결 가벼워요."
+  },
+  {
+    "text": "그건 진짜 말이 안 돼 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "감정을 이해받는 것만으로 위로가 돼요 그런 느낌이에요."
+  },
+  {
+    "text": "말시키지 마 하하하",
+    "should_transition": true,
+    "previous_text": "그건 진짜 말이 안 돼 ㅠㅠㅠ"
+  },
+  {
+    "text": "그냥 꺼져",
+    "should_transition": true,
+    "previous_text": "말시키지 마 하하하"
+  },
+  {
+    "text": "에휴 다 싫어 정말정말",
+    "should_transition": true,
+    "previous_text": "그냥 꺼져"
+  },
+  {
+    "text": "에휴 다 싫어 뭐래",
+    "should_transition": true,
+    "previous_text": "에휴 다 싫어 정말정말"
+  },
+  {
+    "text": "마음을 열어보려 노력하고 있어요 표현하고 나니 한결 가벼워요.",
+    "should_transition": false,
+    "previous_text": "에휴 다 싫어 뭐래"
+  },
+  {
+    "text": "아 몰라 진짜 하하하",
+    "should_transition": true,
+    "previous_text": "마음을 열어보려 노력하고 있어요 표현하고 나니 한결 가벼워요."
+  },
+  {
+    "text": "짜증나 죽겠어 헉",
+    "should_transition": true,
+    "previous_text": "아 몰라 진짜 하하하"
+  },
+  {
+    "text": "감정을 이해받는 것만으로 위로가 돼요 요 며칠 그런 감정이 올라왔어요.",
+    "should_transition": false,
+    "previous_text": "짜증나 죽겠어 헉"
+  },
+  {
+    "text": "상황을 다시 생각해보니 새로운 시각이 생겼어요 아마 그랬던 적이 있어요.",
+    "should_transition": false,
+    "previous_text": "감정을 이해받는 것만으로 위로가 돼요 요 며칠 그런 감정이 올라왔어요."
+  },
+  {
+    "text": "감정을 이해받는 것만으로 위로가 돼요.",
+    "should_transition": false,
+    "previous_text": "상황을 다시 생각해보니 새로운 시각이 생겼어요 아마 그랬던 적이 있어요."
+  },
+  {
+    "text": "말하다 보니 감정이 정리되는 것 같아요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "감정을 이해받는 것만으로 위로가 돼요."
+  },
+  {
+    "text": "헛소리 하지 마 하하하",
+    "should_transition": true,
+    "previous_text": "말하다 보니 감정이 정리되는 것 같아요 그런 느낌이에요."
+  },
+  {
+    "text": "하... 모르겠다 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "헛소리 하지 마 하하하"
+  },
+  {
+    "text": "꺼져 제발 안돼안돼안돼",
+    "should_transition": true,
+    "previous_text": "하... 모르겠다 ㅠㅠㅠ"
+  },
+  {
+    "text": "그땐 솔직해지기 힘들었어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "꺼져 제발 안돼안돼안돼"
+  },
+  {
+    "text": "헛소리 하지 마 하하하",
+    "should_transition": true,
+    "previous_text": "그땐 솔직해지기 힘들었어요 그런 느낌이에요."
+  },
+  {
+    "text": "속이 조금 시원해졌어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "헛소리 하지 마 하하하"
+  },
+  {
+    "text": "조금씩이라도 변화하고 싶다는 생각이 들어요 그런 기억이 나는 것 같아요.",
+    "should_transition": false,
+    "previous_text": "속이 조금 시원해졌어요 그런 느낌이에요."
+  },
+  {
+    "text": "참견하지 마",
+    "should_transition": true,
+    "previous_text": "조금씩이라도 변화하고 싶다는 생각이 들어요 그런 기억이 나는 것 같아요."
+  },
+  {
+    "text": "조금씩이라도 변화하고 싶다는 생각이 들어요 그렇게 느껴졌던 순간이 있어요.",
+    "should_transition": false,
+    "previous_text": "참견하지 마"
+  },
+  {
+    "text": "더는 듣기 싫어 뭐래",
+    "should_transition": true,
+    "previous_text": "조금씩이라도 변화하고 싶다는 생각이 들어요 그렇게 느껴졌던 순간이 있어요."
+  },
+  {
+    "text": "하... 모르겠다",
+    "should_transition": true,
+    "previous_text": "더는 듣기 싫어 뭐래"
+  },
+  {
+    "text": "용기 내서 말해봤어요 그런 일이 있었던 것 같아요.",
+    "should_transition": false,
+    "previous_text": "하... 모르겠다"
+  },
+  {
+    "text": "감정을 이해받는 것만으로 위로가 돼요",
+    "should_transition": false,
+    "previous_text": "용기 내서 말해봤어요 그런 일이 있었던 것 같아요."
+  },
+  {
+    "text": "내 마음이 어떤 상태인지 감이 와요 가끔 그런 생각이 맴돌아요.",
+    "should_transition": false,
+    "previous_text": "감정을 이해받는 것만으로 위로가 돼요"
+  },
+  {
+    "text": "그냥 꺼져 뭐래",
+    "should_transition": true,
+    "previous_text": "내 마음이 어떤 상태인지 감이 와요 가끔 그런 생각이 맴돌아요."
+  },
+  {
+    "text": "헛소리 하지 마",
+    "should_transition": true,
+    "previous_text": "그냥 꺼져 뭐래"
+  },
+  {
+    "text": "아 몰라 진짜 아아아",
+    "should_transition": true,
+    "previous_text": "헛소리 하지 마"
+  },
+  {
+    "text": "감정을 이해받는 것만으로 위로가 돼요",
+    "should_transition": false,
+    "previous_text": "아 몰라 진짜 아아아"
+  },
+  {
+    "text": "말시키지 마",
+    "should_transition": true,
+    "previous_text": "감정을 이해받는 것만으로 위로가 돼요"
+  },
+  {
+    "text": "예전에는 도망쳤던 기억이 있어요 그런 마음이 생겼어요.",
+    "should_transition": false,
+    "previous_text": "말시키지 마"
+  },
+  {
+    "text": "조금씩 내 마음을 인정해보려고요 그런 마음이 생겼어요.",
+    "should_transition": false,
+    "previous_text": "예전에는 도망쳤던 기억이 있어요 그런 마음이 생겼어요."
+  },
+  {
+    "text": "과거엔 말조차 못 꺼냈어요.",
+    "should_transition": false,
+    "previous_text": "조금씩 내 마음을 인정해보려고요 그런 마음이 생겼어요."
+  },
+  {
+    "text": "감정을 이해받는 것만으로 위로가 돼요.",
+    "should_transition": false,
+    "previous_text": "과거엔 말조차 못 꺼냈어요."
+  },
+  {
+    "text": "더 이상 못 하겠어 ㅠㅠㅠ",
+    "should_transition": true,
+    "previous_text": "감정을 이해받는 것만으로 위로가 돼요."
+  },
+  {
+    "text": "마음을 열어보려 노력하고 있어요 그렇게 느껴졌던 순간이 있어요.",
+    "should_transition": false,
+    "previous_text": "더 이상 못 하겠어 ㅠㅠㅠ"
+  },
+  {
+    "text": "헛소리 하지 마 안돼안돼안돼",
+    "should_transition": true,
+    "previous_text": "마음을 열어보려 노력하고 있어요 그렇게 느껴졌던 순간이 있어요."
+  },
+  {
+    "text": "그건 진짜 말이 안 돼 하하하",
+    "should_transition": true,
+    "previous_text": "헛소리 하지 마 안돼안돼안돼"
+  },
+  {
+    "text": "듣기 싫어 노노노",
+    "should_transition": true,
+    "previous_text": "그건 진짜 말이 안 돼 하하하"
+  },
+  {
+    "text": "스스로를 돌아보게 되었어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "듣기 싫어 노노노"
+  },
+  {
+    "text": "그냥 꺼져 뭐래",
+    "should_transition": true,
+    "previous_text": "스스로를 돌아보게 되었어요 그런 느낌이에요."
+  },
+  {
+    "text": "용기 내서 말해봤어요 드러낼 수 있어서 다행이에요.",
+    "should_transition": false,
+    "previous_text": "그냥 꺼져 뭐래"
+  },
+  {
+    "text": "감정을 이해받는 것만으로 위로가 돼요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "용기 내서 말해봤어요 드러낼 수 있어서 다행이에요."
+  },
+  {
+    "text": "감정의 실마리가 잡혀요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "감정을 이해받는 것만으로 위로가 돼요 그런 느낌이에요."
+  },
+  {
+    "text": "갑자기 이게 뭐람 뭐래",
+    "should_transition": true,
+    "previous_text": "감정의 실마리가 잡혀요 그런 느낌이에요."
+  },
+  {
+    "text": "감정을 이해받는 것만으로 위로가 돼요",
+    "should_transition": false,
+    "previous_text": "갑자기 이게 뭐람 뭐래"
+  },
+  {
+    "text": "감정을 표현할 수 있어서 다행이에요.",
+    "should_transition": false,
+    "previous_text": "감정을 이해받는 것만으로 위로가 돼요"
+  },
+  {
+    "text": "듣기 싫어 뭐래",
+    "should_transition": true,
+    "previous_text": "감정을 표현할 수 있어서 다행이에요."
+  },
+  {
+    "text": "말시키지 마 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "듣기 싫어 뭐래"
+  },
+  {
+    "text": "내 마음이 어떤 상태인지 감이 와요",
+    "should_transition": false,
+    "previous_text": "말시키지 마 ㅋㅋㅋ"
+  },
+  {
+    "text": "예전에는 도망쳤던 기억이 있어요.",
+    "should_transition": false,
+    "previous_text": "내 마음이 어떤 상태인지 감이 와요"
+  },
+  {
+    "text": "아 몰라 진짜 으아아아",
+    "should_transition": true,
+    "previous_text": "예전에는 도망쳤던 기억이 있어요."
+  },
+  {
+    "text": "상황을 다시 생각해보니 새로운 시각이 생겼어요 그런 느낌이에요.",
+    "should_transition": false,
+    "previous_text": "아 몰라 진짜 으아아아"
+  },
+  {
+    "text": "진짜 의미 없어 그건싫어",
+    "should_transition": true,
+    "previous_text": "상황을 다시 생각해보니 새로운 시각이 생겼어요 그런 느낌이에요."
+  },
+  {
+    "text": "그 얘긴 이제 그만해 아ㅠㅠ",
+    "should_transition": true,
+    "previous_text": "진짜 의미 없어 그건싫어"
+  },
+  {
+    "text": "어렴풋이 내 기분이 이해돼요.",
+    "should_transition": false,
+    "previous_text": "그 얘긴 이제 그만해 아ㅠㅠ"
+  },
+  {
+    "text": "몰라 진짜 짜증나",
+    "should_transition": true,
+    "previous_text": "어렴풋이 내 기분이 이해돼요."
+  },
+  {
+    "text": "그만 좀 해",
+    "should_transition": true,
+    "previous_text": "몰라 진짜 짜증나"
+  },
+  {
+    "text": "됐다고 했잖아 아아아",
+    "should_transition": true,
+    "previous_text": "그만 좀 해"
+  },
+  {
+    "text": "감정을 이해받는 것만으로 위로가 돼요 아마 그랬던 적이 있어요.",
+    "should_transition": false,
+    "previous_text": "됐다고 했잖아 아아아"
+  },
+  {
+    "text": "말시키지 마 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "감정을 이해받는 것만으로 위로가 돼요 아마 그랬던 적이 있어요."
+  },
+  {
+    "text": "조금씩 내 마음을 인정해보려고요.",
+    "should_transition": false,
+    "previous_text": "말시키지 마 ㅋㅋㅋ"
+  },
+  {
+    "text": "꺼져 제발 하하하",
+    "should_transition": true,
+    "previous_text": "조금씩 내 마음을 인정해보려고요."
+  },
+  {
+    "text": "정말 하기 싫어 하하하",
+    "should_transition": true,
+    "previous_text": "꺼져 제발 하하하"
+  },
+  {
+    "text": "용기 내서 말해봤어요 그런 마음이 자꾸 들어요.",
+    "should_transition": false,
+    "previous_text": "정말 하기 싫어 하하하"
+  },
+  {
+    "text": "하... 모르겠다 아ㅠㅠ",
+    "should_transition": true,
+    "previous_text": "용기 내서 말해봤어요 그런 마음이 자꾸 들어요."
+  },
+  {
+    "text": "진짜 의미 없어 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "하... 모르겠다 아ㅠㅠ"
+  },
+  {
+    "text": "몰라 진짜 짜증나 ㅋㅋㅋ",
+    "should_transition": true,
+    "previous_text": "진짜 의미 없어 ㅋㅋㅋ"
+  },
+  {
+    "text": "처음으로 내 마음에 집중해봤어요 이야기할 수 있어서 마음이 편해요.",
+    "should_transition": false,
+    "previous_text": "몰라 진짜 짜증나 ㅋㅋㅋ"
+  },
+  {
+    "text": "으아아아악 아ㅠㅠ",
+    "should_transition": true,
+    "previous_text": "처음으로 내 마음에 집중해봤어요 이야기할 수 있어서 마음이 편해요."
+  }
+]

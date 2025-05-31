@@ -5,11 +5,12 @@ from llama_cpp import Llama
 
 LLM_MI_INSTANCE = {}
 
+# ✅ 모델 로딩 함수
 def load_mi_model(model_path: str) -> Llama:
     global LLM_MI_INSTANCE
     if model_path not in LLM_MI_INSTANCE:
         try:
-            print("🚀 MI 모델 로딩 중...", flush=True)
+            print("\U0001F680 MI 모델 로딩 중...", flush=True)
             LLM_MI_INSTANCE[model_path] = Llama(
                 model_path=model_path,
                 n_ctx=512,
@@ -35,12 +36,14 @@ def load_mi_model(model_path: str) -> Llama:
             raise RuntimeError("MI 모델 로딩 실패")
     return LLM_MI_INSTANCE[model_path]
 
+# ✅ 상태 정의
 class AgentState(BaseModel):
     question: str
     response: str
     history: List[str]
     drift_trace: List[Tuple[str, bool]] = []
 
+# ✅ 시스템 프롬프트 생성기
 def get_mi_prompt(context="empathy", enhanced=False) -> str:
     if context == "empathy":
         prompt = (
@@ -60,6 +63,7 @@ def get_mi_prompt(context="empathy", enhanced=False) -> str:
         prompt += "\n- 최근 대화 흐름이 반복되었거나 방향이 모호했습니다. 질문을 더 구체적으로 해주세요."
     return prompt
 
+# ✅ MI 스트리밍 응답 생성기
 async def stream_mi_reply(state: AgentState, model_path: str) -> AsyncGenerator[bytes, None]:
     user_input = state.question.strip()
 
@@ -78,30 +82,19 @@ async def stream_mi_reply(state: AgentState, model_path: str) -> AsyncGenerator[
     try:
         llm = load_mi_model(model_path)
 
-        # context 설정
-        if state.drift_trace and len(state.drift_trace) > 0:
-            last_stage = state.drift_trace[-1][0]
-            context = "cbt" if last_stage.startswith("cbt") else "empathy"
-        else:
-            context = "empathy"
+        # ✅ 문맥 설정
+        context = "cbt" if any(s.startswith("cbt") for s, _ in state.drift_trace[-3:]) else "empathy"
+        enhanced = any(s == "mi" and drift for s, drift in state.drift_trace[-5:])
 
-        # enhanced 조건 안전 처리
-        enhanced = any(
-            isinstance(item, (list, tuple)) and len(item) == 2 and item[0] == "mi" and item[1]
-            for item in state.drift_trace[-5:]
-        ) if state.drift_trace else False
-
+        # ✅ 멀티턴 메시지 구성
         messages = [{"role": "system", "content": get_mi_prompt(context, enhanced)}]
-
-        # ✅ 안전한 짝 구성: zip 사용하여 짝이 안 맞는 경우 무시
-        history_pairs = list(zip(state.history[::2], state.history[1::2]))
-        for user_msg, assistant_msg in history_pairs[-5:]:
+        history_pairs = list(zip(state.history[::2], state.history[1::2]))[-5:]
+        for user_msg, assistant_msg in history_pairs:
             messages.append({"role": "user", "content": user_msg})
             messages.append({"role": "assistant", "content": assistant_msg})
-
-        # 마지막 사용자 입력 추가
         messages.append({"role": "user", "content": user_input})
 
+        # ✅ 스트리밍 응답
         full_response, first_token_sent = "", False
         for chunk in llm.create_chat_completion(messages=messages, stream=True):
             token = chunk.get("choices", [{}])[0].get("delta", {}).get("content", "")

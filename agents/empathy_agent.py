@@ -85,9 +85,15 @@ async def stream_empathy_reply(
     try:
         llm = load_llama_model(model_path, "empathy")
         messages = [
-            {"role": "system", "content": get_empathy_prompt()},
-            {"role": "user", "content": user_input}
+            {"role": "system", "content": get_empathy_prompt()}
         ]
+
+        if state and state.history:
+            for i in range(0, len(state.history), 2):
+                if i + 1 < len(state.history):
+                    messages.append({"role": "user", "content": state.history[i]})
+                    messages.append({"role": "assistant", "content": state.history[i + 1]})
+        messages.append({"role": "user", "content": user_input})
 
         full_response = ""
         first_token_sent = False
@@ -108,12 +114,14 @@ async def stream_empathy_reply(
         if state:
             state.response = reply
 
+        history = (state.history if state else []) + [user_input, reply]
+
         yield b"\n---END_STAGE---\n" + json.dumps({
             "next_stage": "mi" if turn >= 2 else "empathy",
             "response": reply,
             "turn": 0 if turn >= 2 else turn + 1,
             "intro_shown": True,
-            "history": [user_input, reply]
+            "history": history
         }, ensure_ascii=False).encode("utf-8")
 
     except Exception as e:
