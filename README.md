@@ -128,7 +128,7 @@ if detect_persona_drift(state.stage, full_reply):
 ## 👩‍💻 개발자 정보
 
 - **이름**: 윤소영 (SoYoung Yun)  
-- 📧 **개인 이메일**: yunsoyoung2004@gmail.com  
+- 📧 **개인 이메일**: so_young2004_@naver.com  
 - 📧 **학교 이메일**: thdud041113@g.skku.edu  
 - 🔗 **GitHub**: [github.com/yunsoyoung2004](https://github.com/yunsoyoung2004)
 
